@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sb.mall.order.dao.OrderDao">
+
+	<insert id="upsertCart" statementType="CALLABLE" parameterType="com.sb.mall.order.model.OrderCartParam">
+		{call insert_cart(
+			#{orders,mode=IN},
+			#{result,mode=OUT,jdbcType=VARCHAR,javaType=java.lang.String}
+		)}
+	</insert>
+	
+	<insert id="insertOrderSP" statementType="CALLABLE" parameterType="com.sb.mall.order.model.OrderCartParam">
+		{call insert_order(
+			#{orders,mode=IN},
+			#{result,mode=OUT,jdbcType=VARCHAR}
+		)}
+	</insert>
+
+	<delete id="deleteCart" parameterType="list">
+		delete from `Order`
+		<where>
+			userSeq=#{list[0].userSeq} and orderDetailNum=0 and
+		<foreach collection="list" item="order" open="(" close=")" separator="or">
+			goodsNo=#{order.goodsNo} and optionSeq=#{order.optionSeq}
+		</foreach>
+		</where>
+	</delete>
+	
+	<select id="selectCarts" resultType="map">
+		SELECT * FROM `Order` o, Goods g, GoodsOption go, Product p
+		<where>
+		o.userSeq=#{param1} and o.orderDetailNum=0 
+		and o.goodsNo=g.goodsNo and g.productSeq=p.productSeq and o.optionSeq=go.optionSeq;
+		</where>
+	</select>
+	
+	<select id="selectOrdersAll" resultType="com.sb.mall.order.model.Order">
+		SELECT * FROM `Order`
+		<where>
+		orderDetailNum=0 and userSeq=#{userSeq}
+		</where>
+	</select>
+
+	<select id="selectCartForOrder" resultType="map">
+		SELECT * FROM `Order` o, Product p where
+		<foreach collection="list" item="orders" open="(" separator="or" close=")">
+			o.userSeq=#{orders.userSeq} 
+			and o.productSeq=#{orders.productSeq} 
+			and o.option=#{orders.option} 
+		</foreach>
+		and OrderDetailNum=0 and p.productSeq=o.productSeq
+	</select>
+	
+	<select id="selectOrderAndProduct" resultType="map">
+		SELECT * FROM `Order` o, Product p where o.productSeq=#{productSeq}
+		and p.productSeq=o.productSeq
+	</select>
+	
+	<select id="selectProduct" resultType="com.sb.mall.store.model.Product">
+		SELECT * FROM Product where productSeq=#{productSeq}
+	</select>
+
+	<select id="select" resultType="com.sb.mall.order.model.Order"
+		parameterType="String">
+		select * from `Order` where orderDetailNum = #{orderDetailNum}
+	</select>
+
+</mapper>

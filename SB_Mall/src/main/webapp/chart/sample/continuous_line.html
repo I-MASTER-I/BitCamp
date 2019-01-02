@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="charset=utf-8;" />
+
+    <script src="../dist/chart.js"></script>
+</head>
+
+<body>
+
+    <div id="result" style="width: 600px; height: 600px;"></div>
+
+    <script id="script_code">
+        var chart = jui.include("chart.builder");
+
+        chart("#result", {
+            axis: {
+                y: {
+                    type: "range",
+                    domain: [0, 60],
+                    step: 10,
+                    line: true
+                },
+                x: {
+                    type: "block",
+                    domain: "quarter",
+                    line: true
+                },
+                data: [{
+                        quarter: "1Q",
+                        sales: 50,
+                        profit: 35
+                    },
+                    {
+                        quarter: "2Q",
+                        sales: -20,
+                        profit: -30
+                    },
+                    {
+                        quarter: "3Q",
+                        sales: 10,
+                        profit: -5
+                    },
+                    {
+                        quarter: "4Q",
+                        sales: 30,
+                        profit: 25
+                    }
+                ]
+            },
+            brush: {
+                type: "column",
+                target: ["sales", "profit"]
+            },
+            widget: [{
+                    type: "title",
+                    text: "Bar Sample"
+                },
+                {
+                    type: "tooltip",
+                    orient: "right"
+                },
+                {
+                    type: "legend"
+                }
+            ]
+        })
+
+    </script>
+
+
+</body>
+
+</html>

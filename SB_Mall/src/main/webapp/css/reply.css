@@ -1,0 +1,246 @@
+@charset "UTF-8";
+
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+.replylayout {
+	width: 1000px;
+	margin: 0 auto;
+	margin-bottom: 100px;
+}
+
+.replyTextClass {
+	display: inline-block;
+	height: 100px;
+	border: 1px solid #787878;
+	vertical-align: middle;
+}
+
+.replyInputBox {
+	height: 100px;
+	margin: 20px 0;
+}
+
+  
+.replyTextAreaBox {
+	background-color: red !important;
+	border-radius: 5px 0px 0px 5px !important;
+}
+#replyFormBox{
+	overflow:hidden;
+	width:900px;
+	margin:15px auto;
+}
+.replyInputText {
+	float: left;
+	border: none;
+	margin: 15px;
+	width: 750px;
+	height: 70px;
+	font-size: 14pt;
+	color: #282828;
+}
+.replyInputBtn {
+	width: 102px;
+	border: none;
+	background-color: #505050;
+	font-size: 20px; font-weight;
+	color: white;
+	border-radius: 0px 10px 10px 0px;
+}
+.reply_h3 {
+	display: inline-block;
+	color: #505050;
+	font-weight: normal;
+}
+
+#replyGetBox {
+	padding: 20px 0;
+}
+
+.reply_h1 {
+	margin-top: 30px;
+	padding-bottom: 10px;
+	border-bottom: 2px solid #505050;
+	font-size: 24pt;
+	color: #282828;
+}
+
+.getReply_H4 {
+	display: inline-block;
+	font-size: 12pt;
+	color: #787878;
+	font-weight: normal;
+	margin-right: 10px;
+}
+
+.getReply_H5 {
+	display: inline-block;
+	font-size: 10pt;
+	color: #c8c8c8;
+	font-weight: lighter;
+	margin-right: 10px;
+}
+
+.replyFrame {
+	width: 800px;
+	word-break: break-all;
+}
+
+.getReply_H2 {
+	padding: 15px 0 5px 20px;
+	font-size: 14pt;
+	color: #282828;
+	font-weight: normal;
+	line-height: 22pt
+}
+
+.replyBtn {
+	float: right;
+	width: 40px;
+	height: 25px;
+	background-color: #f0f0f0;
+	border: none;
+	font-size: 9pt;
+	color: #787878;
+	font-weight: normal;
+	border-radius: 5px;
+	margin-left: 5px;
+}
+
+.replyBtn {
+	width: 40px;
+	height: 25px;
+	background-color: #f0f0f0;
+	border: none;
+	font-size: 9pt;
+	color: #787878;
+	font-weight: normal;
+	border-radius: 5px;
+}
+
+.replyDelete:hover {
+	background-color: #ffc828;
+	color: white;
+}
+
+.replyUnit {
+	padding: 12px 0 20px 0;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+#replyPageBox {
+	text-align: center;
+}
+
+.pageSelect {
+	width: 40px;
+	height: 40px;
+	border: 1px solid #787878;
+	color: #787878;
+	font-size: 12pt;
+	border-radius: 5px;
+}
+
+.pageSelect:hover {
+	background-color: #787878 !important;
+	color: white;
+}
+
+.pageActive {
+	border: 1px solid #787878 !important;
+	background-color: #787878 !important;
+	color: white;
+}
+
+#replyModifyBigBox {
+	width: 100%;
+	height: 100%;
+	display: none;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+#replyModifyForm {
+	width: 760px;
+	padding: 20px;
+	background-color: white;
+	margin: 0 auto;
+	margin-top: 250px;
+}
+
+#replyModifyInfoBox{
+	display:inline-block;
+	width: 150px;
+}
+
+.replyModifyText{
+	float:right;
+	width: 500px;
+	height: 90px;
+	margin-bottom: 20px;
+}
+.replyModifyBtn{
+	background-color: #f0f0f0;
+	padding: 5px 10px;
+	border-radius: 3px;	
+}
+.replyModifyBtn:hover{
+	cursor: pointer;
+}
+
+.replyEmptyBox {
+	text-align: center;
+}
+
+.replyEmpty {
+	color: #282828;
+	font-size: 16pt;
+	font-weight: normal;
+}
+
+.ratingBox {
+	display: inline-block;
+	margin-bottom: 5px;
+}
+
+.rating {
+	width: 20px;
+}
+
+.replyRightBox, .replyLeftBox {
+	display: inline-block;
+}
+
+.replyLeftBox {
+	float: right;
+}
+
+.ratingTitle {
+	margin-right: 10px;
+}
+
+.ratingNum {
+	display: inline-block;
+	margin-left: 5px;
+	color: #ffc828;
+	font-size: 16pt;
+	font-weight: bold;
+}
+
+.ratingM {
+	width: 15px;
+}
+
+.getRating_H5 {
+	display: inline-block;
+	font-size: 12pt;
+	color: #ffc828;
+	font-weight: bold;
+	margin-right: 10px;
+}

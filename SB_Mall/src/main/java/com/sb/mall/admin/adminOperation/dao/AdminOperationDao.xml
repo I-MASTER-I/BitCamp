@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.sb.mall.admin.adminOperation.dao.AdminOperationDao">
+
+	<!-- loadBottomReport.jsp 에서 사용할 쿼리 -->
+	<!-- 맵 객체를 생성해준다. column에서 반환된 값을 property에 지정한 key로 생성하여 javaType에 지정된 
+		값으로 할당한다. -->
+	<resultMap id="totalBudget" type="java.util.Map">
+		<result column="yearBudgetTotal" property="yearBudgetTotal"
+			javaType="java.lang.Long" />
+		<result column="yearBudget" property="yearBudget"
+			javaType="java.lang.Long" />
+		<result column="monthBudgetTotal" property="monthBudgetTotal"
+			javaType="java.lang.Long" />
+		<result column="monthBudget" property="monthBudget"
+			javaType="java.lang.Long" />
+	</resultMap>
+
+	<resultMap id="dailySalesOrerCount" type="java.util.Map">
+		<result column="dailySales" property="dailySales"
+			javaType="java.lang.Integer" />
+		<result column="orderCount" property="orderCount"
+			javaType="java.lang.Integer" />
+	</resultMap>
+
+	<resultMap id="totalCostSales" type="java.util.Map">
+		<result column="monthCost" property="monthCost"
+			javaType="java.lang.Integer" />
+		<result column="monthAmount" property="monthAmount"
+			javaType="java.lang.Long" />
+		<result column="monthCostRate" property="monthCostRate"
+			javaType="java.lang.Integer" />
+		<result column="monthAvg" property="monthAvg"
+			javaType="java.lang.Integer" />
+	</resultMap>
+	<resultMap id="utilSupllie" type="java.util.Map">
+		<result column="utility" property="utility"
+			javaType="java.lang.Integer" />
+		<result column="supplie" property="supplie"
+			javaType="java.lang.Integer" />
+	</resultMap>
+
+	<!-- // 토탈연버젯, 이번달까지연버젯, 토탈월버젯, 오늘까지월버젯 -->
+	<select id="totalBudget" resultMap="totalBudget">
+		select yearBudget
+		yearBudgetTotal, (case when month(#{nowDate}) = 1 then
+		Jan when
+		month(#{nowDate}) = 2 then Jan+Feb when month(#{nowDate})
+		= 3 then
+		Jan+Feb+Mar when month(#{nowDate}) = 4 then Jan+Feb+Mar+Apr
+		when
+		month(#{nowDate}) = 5 then Jan+Feb+Mar+Apr+May when
+		month(#{nowDate}) =
+		6 then Jan+Feb+Mar+Apr+May+Jun when
+		month(#{nowDate}) = 7 then
+		Jan+Feb+Mar+Apr+May+Jun+Jul when
+		month(#{nowDate}) = 8 then
+		Jan+Feb+Mar+Apr+May+Jun+Jul+Aug when
+		month(#{nowDate}) = 9 then
+		Jan+Feb+Mar+Apr+May+Jun+Jul+Aug+Sep when
+		month(#{nowDate}) = 10 then
+		Jan+Feb+Mar+Apr+May+Jun+Jul+Aug+Sep+Oct
+		when month(#{nowDate}) = 11
+		then
+		Jan+Feb+Mar+Apr+May+Jun+Jul+Aug+Sep+Oct+Nov when month(#{nowDate})
+		=
+		12 then Jan+Feb+Mar+Apr+May+Jun+Jul+Aug+Sep+Oct+Nov+`Dec` end)
+		yearBudget, (case when month(#{nowDate}) = 1 then Jan when
+		month(#{nowDate}) = 2 then Feb when month(#{nowDate}) = 3 then Mar
+		when month(#{nowDate}) = 4 then Apr when month(#{nowDate}) = 5
+		then May
+		when month(#{nowDate}) = 6 then Jun when
+		month(#{nowDate}) = 7 then Jul
+		when month(#{nowDate}) = 8 then Aug
+		when month(#{nowDate}) = 9 then Sep
+		when month(#{nowDate}) = 10
+		then Oct when month(#{nowDate}) = 11 then
+		Nov when
+		month(#{nowDate}) = 12 then `Dec` end) monthBudgetTotal, (case
+		when
+		month(#{nowDate}) = 1 THEN ROUND(Jan / day(LAST_DAY(#{nowDate})) *
+		day(#{nowDate})) when month(#{nowDate}) = 2 THEN ROUND(Feb /
+		day(LAST_DAY(#{nowDate})) * day(#{nowDate})) when
+		month(#{nowDate}) = 3
+		THEN ROUND(Mar / day(LAST_DAY(#{nowDate})) *
+		day(#{nowDate})) when
+		month(#{nowDate}) = 4 THEN ROUND(Apr /
+		day(LAST_DAY(#{nowDate})) *
+		day(#{nowDate})) when
+		month(#{nowDate}) = 5 THEN ROUND(May /
+		day(LAST_DAY(#{nowDate})) *
+		day(#{nowDate})) when month(#{nowDate}) = 6
+		THEN ROUND(Jun /
+		day(LAST_DAY(#{nowDate})) * day(#{nowDate})) when
+		month(#{nowDate}) = 7 THEN ROUND(Jul / day(LAST_DAY(#{nowDate})) *
+		day(#{nowDate})) when month(#{nowDate}) = 8 THEN ROUND(Aug /
+		day(LAST_DAY(#{nowDate})) * day(#{nowDate})) when
+		month(#{nowDate}) = 9
+		THEN ROUND(Sep / day(LAST_DAY(#{nowDate})) *
+		day(#{nowDate})) when
+		month(#{nowDate}) = 10 THEN ROUND(Oct /
+		day(LAST_DAY(#{nowDate})) *
+		day(#{nowDate})) when
+		month(#{nowDate}) = 11 THEN ROUND(Nov /
+		day(LAST_DAY(#{nowDate})) *
+		day(#{nowDate})) when month(#{nowDate}) =
+		12 THEN ROUND(`Dec` /
+		day(LAST_DAY(#{nowDate})) * day(#{nowDate})) end)
+		monthBudget from
+		Budget where year = year(#{nowDate});
+	</select>
+	<!-- // 이번달까지 연매출 -->
+	<select id="yearAmount" resultType="long">
+		SELECT ifnull(sum(totalAmount), 0)
+		yearAmount FROM OrderDetail where
+		year(orderTime) = year(#{nowDate})
+		and month(orderTime) <![CDATA[<=]]>
+		month(#{nowDate}) and status <![CDATA[>]]>
+		0;
+	</select>
+	<!-- // 일매출, 오늘의 주문수 -->
+	<select id="dailySalesOrerCount" resultMap="dailySalesOrerCount">
+		SELECT
+		ifnull(sum(totalAmount), 0) dailySales, count(*) orderCount FROM
+		OrderDetail where date(orderTime) = date(#{nowDate}) and status <![CDATA[>]]>
+		0;
+	</select>
+	<!-- // 오늘의 방문수 -->
+	<select id="visitCount" resultType="int">
+		SELECT
+		ifnull(sum(visitcount),0) visitCount FROM VisitGuest WHERE
+		date(visitDate) = date(#{nowDate});
+	</select>
+	<!-- // 오늘의 신규회원 -->
+	<select id="newMember" resultType="int">
+		SELECT count(*) FROM
+		MemberInfo where date(regDate) = date(#{nowDate});
+	</select>
+	<!-- // 이번달 오늘까지 cost, 이번달 오늘까지매출, cost% 이번달 일평균 -->
+	<select id="totalCostSales" resultMap="totalCostSales">
+		SELECT
+		ifnull(sum((o.quantity * gs.cost)), 0) monthCost,
+		ifnull(sum(o.salePrice), 0) monthAmount,
+		ifnull((sum((o.quantity *
+		gs.cost)) / sum(o.salePrice)*100), 0) monthCostRate,
+		ifnull(SUM(o.salePrice) / day(#{nowDate}), 0) monthAvg
+		FROM `Order` o,
+		Goods gs, OrderDetail od
+		WHERE o.goodsNo = gs.goodsNo
+		AND
+		o.orderDetailNum = od.orderDetailNum
+		and od.orderTime <![CDATA[>]]>
+		LAST_DAY(#{nowDate} - interval 1 month)
+		and od.orderTime <![CDATA[<]]>
+		date(#{nowDate}) + interval 1 day
+		AND od.status <![CDATA[>]]>
+		0;
+	</select>
+	<!-- // 이번달 오늘까지 인건비 -->
+	<select id="laborCost" resultType="int">
+		SELECT sum(laborCost) /
+		day(last_day(#{nowDate})) * day(#{nowDate})
+		laborAmount FROM
+		SB_Master.MemberInfo where gradeNum >= 3;
+	</select>
+	<!-- // 이번달 오늘까지 유틸리티, 소모품 -->
+	<select id="utilSupllie" resultMap="utilSupllie">
+		select ifnull(sum(electric + water), 0) utility, ifnull(sum(supplie),
+		0)
+		supplie from TCE
+		where operationDate <![CDATA[>]]>
+		LAST_DAY(#{nowDate} - interval 1 month)
+		and operationDate <![CDATA[<]]>
+		date(#{nowDate}) + interval 1 day;
+	</select>
+	<!-- // 이번달 오늘까지 임대료 -->
+	<select id="rent" resultType="int">
+		SELECT rent /
+		day(LAST_DAY(#{nowDate})) * day(#{nowDate}) FROM
+		SB_Master.TNC;
+	</select>
+
+	<!-- loadBudgetReport.jsp 에서 사용할 쿼리문 -->
+
+	<!-- 버젯 전체 -->
+	<select id="selectBudget"
+		resultType="com.sb.mall.admin.adminOperation.model.BudgetVO">
+		SELECT * FROM Budget where `year` = #{nowYear};
+	</select>
+	<!-- 버젯 수정 -->
+	<update id="updateBudget"
+		parameterType="com.sb.mall.admin.adminOperation.model.BudgetVO">
+		update Budget
+		SET yearBudget = #{yearBudget}
+		,Jan = #{Jan}
+		,Feb = #{Feb}
+		,Mar = #{Mar}
+		,Apr = #{Apr}
+		,May = #{May}
+		,Jun = #{Jun}
+		,Jul
+		= #{Jul}
+		,Aug = #{Aug}
+		,Sep = #{Sep}
+		,Oct = #{Oct}
+		,Nov = #{Nov}
+		,`Dec` =
+		#{Dec}
+		WHERE `year` = #{nowYear}
+
+	</update>
+	<!-- // 버젯 추가 -->
+	<insert id="insertBudget">
+		INSERT INTO `Budget` (year) VALUES (#{nowYear});
+	</insert>
+
+	<!-- //일반 주문 및 크라우드펀딩 주문 갯수 -->
+	<select id="selectOrderDetailCount" resultType="int">
+		select count(*) from
+		(SELECT
+		date(orderTime) orderTime
+		FROM
+		${param3}
+		WHERE
+		DATE(orderTime) <![CDATA[>]]>
+		DATE(#{param1} - INTERVAL 1 DAY)
+		AND DATE(orderTime) <![CDATA[<]]>
+		DATE(#{param2} + INTERVAL 1 DAY)
+		AND status <![CDATA[>]]>
+		0
+		GROUP BY DATE(orderTime)) orderCount;
+	</select>
+
+	<!-- //일별 날짜, 주문수, 방문수, 매출 조회 - 일반주문 및 크라우드펀딩 -->
+	<select id="selectDailySalVOList"
+		resultType="com.sb.mall.admin.adminOperation.model.SalVO">
+		SELECT
+		DATE(od.orderTime) orderTime,
+		COUNT(*) orderCount,
+		IFNULL(vg.visitCount, 0) visitCount,
+		SUM(od.totalAmount)
+		amount
+		FROM
+		${param3} od
+		LEFT JOIN
+		(SELECT
+		SUM(visitCount) visitCount,
+		visitDate
+		FROM
+		VisitGuest
+		GROUP BY DATE(visitDate)) vg ON
+		DATE(od.orderTime) =
+		DATE(vg.visitDate)
+		WHERE
+		DATE(od.orderTime) <![CDATA[>]]>
+		DATE(#{param1} - INTERVAL 1 DAY)
+		AND DATE(od.orderTime) <![CDATA[<]]>
+		DATE(#{param2} + INTERVAL 1 DAY)
+		AND od.status <![CDATA[>]]>
+		0
+		GROUP BY date(od.orderTime)
+		order by orderTime desc
+		limit
+		#{param4},
+		#{param5} ;
+	</select>
+
+	<!-- //월 일반 주문 및 크라우드펀딩 주문 갯수 -->
+	<select id="selectMonthlyOrderDetailCount" resultType="int">
+		select count(*) from
+		(SELECT
+		date(orderTime) orderTime
+		FROM
+		${param3}
+		WHERE
+		DATE(orderTime) <![CDATA[>]]>
+		DATE(LAST_DAY(#{param1} - INTERVAL 1 month))
+		AND DATE(orderTime) <![CDATA[<]]>
+		DATE(LAST_DAY(#{param2}) + INTERVAL 1 day)
+		AND status <![CDATA[>]]>
+		0
+		GROUP BY date_format(orderTime, '%Y-%m')) orderCount;
+	</select>
+
+	<!-- //월별 날짜, 주문수, 방문수, 매출 조회 - 일반주문 및 크라우드펀딩 -->
+	<select id="selectMonthlySalVOList"
+		resultType="com.sb.mall.admin.adminOperation.model.SalVO">
+		SELECT
+		date_format(od.orderTime, '%Y-%m') orderTime,
+		COUNT(*)
+		orderCount,
+		IFNULL(vg.visitCount, 0) visitCount,
+		SUM(od.totalAmount)
+		amount
+		FROM
+		${param3} od
+		LEFT JOIN
+		(SELECT
+		SUM(visitCount) visitCount,
+		visitDate
+		FROM
+		VisitGuest
+		GROUP BY date_format(visitDate, '%Y-%m')) vg ON
+		date_format(od.orderTime,
+		'%Y-%m') = date_format(vg.visitDate, '%Y-%m')
+		WHERE
+		DATE(od.orderTime) <![CDATA[>]]>
+		DATE(LAST_DAY(#{param1} - INTERVAL 1 month))
+		AND DATE(od.orderTime) <![CDATA[<]]>
+		DATE(LAST_DAY(#{param2}) + INTERVAL 1 day)
+		AND od.status <![CDATA[>]]>
+		0
+		GROUP BY month(od.orderTime) order by orderTime desc
+		limit #{param4},
+		#{param5};
+
+
+	</select>
+
+	<!-- //주별 일반 주문 및 크라우드펀딩 주문 갯수 -->
+	<select id="selectWeeklyOrderDetailCount" resultType="int"
+		parameterType="String">
+		select count(*) from
+		(SELECT
+		DATE_FORMAT(DATE_SUB(orderTime, INTERVAL
+		(DAYOFWEEK(orderTime)-1) DAY), '%Y.%m.%d') as start,
+		DATE_FORMAT(DATE_SUB(orderTime, INTERVAL (DAYOFWEEK(orderTime)-7)
+		DAY), '%Y.%m.%d') as end
+		FROM
+		${param3}
+		WHERE
+		DATE(orderTime) <![CDATA[>]]>
+		DATE(#{param1} - INTERVAL 1 DAY)
+		AND DATE(orderTime) <![CDATA[<]]>
+		DATE(#{param2} + INTERVAL 1 DAY)
+		AND status <![CDATA[>]]>
+		0
+		GROUP BY start) orderCount;
+	</select>
+
+	<!-- //주별 날짜, 주문수, 방문수, 매출 조회 - 일반주문 및 크라우드펀딩 -->
+	<select id="selectWeeklySalVOList"
+		resultType="com.sb.mall.admin.adminOperation.model.SalVO">
+		SELECT
+		DATE_FORMAT(DATE_SUB(od.orderTime, INTERVAL
+		(DAYOFWEEK(od.orderTime)-1) DAY), '%Y.%m.%d') as start,
+		DATE_FORMAT(DATE_SUB(od.orderTime, INTERVAL
+		(DAYOFWEEK(od.orderTime)-7) DAY), '%Y.%m.%d') as end,
+		concat(DATE_FORMAT(DATE_SUB(od.orderTime, INTERVAL
+		(DAYOFWEEK(od.orderTime)-1) DAY), '%Y.%m.%d'), ' - ',
+		DATE_FORMAT(DATE_SUB(od.orderTime, INTERVAL
+		(DAYOFWEEK(od.orderTime)-7) DAY), '%Y.%m.%d')) orderTime,
+		COUNT(*)
+		orderCount,
+		IFNULL(vg.visitCount, 0) visitCount,
+		SUM(od.totalAmount)
+		amount
+		FROM
+		${param3} od
+		LEFT JOIN
+		(SELECT
+		DATE_FORMAT(DATE_SUB(visitDate,
+		INTERVAL (DAYOFWEEK(visitDate)-1)
+		DAY), '%Y.%m.%d') as start,
+		DATE_FORMAT(DATE_SUB(visitDate, INTERVAL
+		(DAYOFWEEK(visitDate)-7)
+		DAY),
+		'%Y.%m.%d') as end,
+		SUM(visitCount)
+		visitCount
+		FROM
+		VisitGuest
+		GROUP BY
+		start) vg ON DATE(od.orderTime) <![CDATA[>=]]>
+		vg.start and DATE(od.orderTime)
+		<![CDATA[<=]]>
+		vg.end
+		WHERE
+		DATE(od.orderTime) <![CDATA[>]]>
+		DATE(#{param1} - INTERVAL 1 DAY)
+		AND DATE(od.orderTime) <![CDATA[<]]>
+		DATE(#{param2} + INTERVAL 1 DAY)
+		AND od.status <![CDATA[>]]>
+		0
+		GROUP BY DATE_FORMAT(DATE_SUB(od.orderTime, INTERVAL
+		(DAYOFWEEK(od.orderTime)-1) DAY), '%Y.%m.%d')
+		order
+		by start desc limit
+		#{param4}, #{param5};
+	</select>
+
+	<!-- //시간대별 일반 주문 및 크라우드펀딩 주문 갯수 -->
+	<select id="selectHourlyOrderDetailCount" resultType="int" >
+		select count(*) from
+		(SELECT
+		*
+		FROM
+		${param3}
+		WHERE
+		DATE(orderTime) =
+		DATE(#{param1})
+		AND status <![CDATA[>]]>
+		0
+		GROUP BY
+		hour(orderTime)) orderCount;
+	</select>
+
+	<!-- //시간대별 날짜, 주문수, 방문수, 매출 조회 - 일반주문 및 크라우드펀딩 -->
+	<select id="selectHourlySalVOList"
+		resultType="com.sb.mall.admin.adminOperation.model.SalVO">
+		SELECT
+		time_format(od.orderTime, '%H:00 - %H:59') orderTime,
+		COUNT(*) orderCount,
+		IFNULL((vg.visitCount), 0) visitCount,
+		SUM(od.totalAmount) amount
+		FROM
+		${param3} od
+		LEFT JOIN
+		(SELECT
+		visitCount, visitDate
+		FROM
+		VisitGuest
+		where
+		date(visitDate) = date(#{param1})) vg ON hour(od.orderTime)
+		=
+		hour(vg.visitDate)
+		WHERE
+		DATE(od.orderTime) = DATE(#{param1})
+		AND
+		od.status <![CDATA[>]]>
+		0
+		GROUP BY hour(od.orderTime) order by orderTime desc limit
+		#{param4},
+		#{param5};
+	</select>
+
+
+
+
+
+
+
+
+</mapper> 
+ 

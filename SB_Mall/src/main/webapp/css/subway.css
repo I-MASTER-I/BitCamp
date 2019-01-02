@@ -1,0 +1,194 @@
+@charset "UTF-8";
+*{
+	padding:0px;
+	margin: 0px;
+}
+#SubwayTimeBigBox{
+	display: none;
+    width: 100%;
+    position: fixed;
+    height: 100%;
+    top: 0px;
+    background-color: rgba(0,0,0,0.5);
+    padding-top: 8%;
+}
+
+#SubwayTimeMidBox{
+	width: 605px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px 30px;
+    border-radius: 10px;
+}
+#subwayBigBox{
+    width: 1000px;
+    margin: 0 auto;
+    margin-top:15px;
+}
+.selectSuperBox{
+	
+}
+#selectBox{
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    overflow: auto;
+    max-height: 200px;
+    margin-bottom: 100px;
+}
+#timeBoxOption{
+	margin: 10px 0;
+    margin-bottom: 30px;
+    padding: 10px 0;
+    border-bottom: 1px solid #585858;
+}
+.selectLine{
+    width: 100px;
+    height: 40px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    font-size: 10pt;
+    font-weight: bold;
+    margin-right: 5px;
+}
+.selectStation{
+	line-height: inherit !important;
+    width: 200px;
+    height: 40px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    font-size: 10pt;
+    font-weight: bold;
+}
+#subwayTimeBtn{
+	display: inline-block;
+    float: right;
+}
+.viewSubwayTime{
+    width: 80px;
+    font-size: 10pt;
+    font-weight: bold;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+}
+.subwayMapBox{
+	width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+}
+.timeBoxDir{
+    display: inline-block;
+    width: 297px;
+    
+}
+.dirUp, .dirDown{
+	overflow: auto;
+    width: 100%;
+    height: 250px;
+    display: inline-block;
+    /* border-top: 2px solid #a0a0a0; */
+    margin-top: 10px;
+    /* padding: 21px 0; */
+}
+
+.timeBoxH4{
+    margin-bottom: 2px;
+    color: #282828;
+}
+.timeBoxH6{
+	margin-bottom: 15px;
+    color: #787878;
+    font-weight: normal;
+}
+
+.SubwayMap{
+    width: 1023px;
+    height: 550px;
+    /* margin: 0 auto; */
+    overflow: auto;
+}
+.subwayMapImage{
+	width:1200px;
+	
+}
+.timeBoxDir{
+	
+}
+.dirUp{
+	
+}
+.dirDown{
+	
+}
+.selectedLine{
+	
+}
+.stationOn, .selectedLine{
+	width: 135px;
+    height: 40px;
+    /* background-color: #f5f5f5; */
+    border: none;
+    border-radius: 5px;
+    font-size: 10pt;
+    font-weight: 400;
+    margin-bottom: 7px;
+    border: 1px solid #505050;
+}
+.stationOn:hover, .selectedLine:hover{
+	background-color: #505050;
+	color:white;
+	border:none;
+}
+.fakeSelected{
+    width: 135px;
+    height: 40px;
+    display: inline-block;
+}
+.selectDays{
+	
+}
+.tBoxLineNum{
+    display: inline-block;
+}
+.timeClose{
+    float: right;
+    cursor: pointer;
+}
+.upNdown{
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 50px;
+    height: 40px;
+}
+.SubwaySize{
+	    padding: 5px 7px;
+    border-radius: 5px;
+    font-size: 10pt;
+    text-align: center;
+    /* line-height: 25px; */
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: #585858;
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+
+
+
+
+
+

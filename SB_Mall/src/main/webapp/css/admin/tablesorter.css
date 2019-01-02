@@ -1,0 +1,16 @@
+
+table.tablesorter thead tr .header:not(.notsorter) {
+	background-image: url(bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.tablesorter thead tr .headerSortUp:not(.notsorter) {
+	background-image: url(asc.gif);
+}
+table.tablesorter thead tr .headerSortDown:not(.notsorter) {
+	background-image: url(desc.gif);
+}
+/* table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp { */
+/* 	background-color: #f0f0f0; */
+/* } */

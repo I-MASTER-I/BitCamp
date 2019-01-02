@@ -1,0 +1,254 @@
+@charset "UTF-8";
+/* 좌측 */
+#left-content {
+	width: 200px;
+	height: 100%;
+	vertical-align: top;
+	background-color: #f0f0f0;
+}
+/* 좌측 메뉴 */
+#navigation {
+}
+#navigation div{
+	border-top: 1px solid #ffffff;
+}
+
+#navigation div:last-child{
+	border-bottom: 1px solid #ffffff;
+}
+#navigation a{
+	padding-top: 3px;
+	padding-bottom: 3px;
+	display: block;
+	color: black;
+}
+#navigation a:hover{
+	background-color: #505050;
+	color: #ffffff;
+}
+/* 좌측 리포트 */
+#report {
+	display: inline-block;
+/* 	height: 650px; */
+}
+.result-left {
+	width: 95px;
+	vertical-align: middle;
+}
+.today-visit, .today-join {
+	height: 25px;
+	border: 1px solid #ffffff;
+	
+}
+.visit-value, .join-value {
+	height: 50px;
+}
+.item{
+	margin-left: 3px;
+	width: 90px;
+}
+.value{
+	margin-right: 3px;
+	width: 50px;
+}
+/* 우측 */
+#content {
+	width: 1000px;
+	height: 100%;
+}
+/* 우측 상단 */
+#header-content {
+	text-align: center;
+	width: 100%;
+	margin-top: 25px;
+}
+/* 우측 하단 */
+#main-content {
+	/* 내용물을 좌우로 정렬 */
+	justify-content:space-between;
+	/* 	감싸는 역할?? */
+	flex-wrap:wrap;
+	display:flex;
+	text-align: center;
+/* 	width: 100%; */
+	margin-top: 15px;
+}
+/* 하단 좌측 */
+#left-innercont {
+	display: inline-block;
+}
+/* 하단 우측 */
+#right-innercont {
+	display: inline-block;
+	vertical-align: top;
+}
+.orderBox{
+	margin-top: 10px;
+}
+.top-report{
+	text-align: center;
+		/* 내용물을 좌우로 정렬 */
+	justify-content:space-between;
+	/* 	감싸는 역할?? */
+	flex-wrap:wrap;
+	display:flex;
+	border-bottom: 1px solid #dcdcdc;
+	margin-bottom: 30px;
+}
+.report-box{
+	display: inline-block;
+/* 	background-color: #787878; */
+    border-radius: 5px;
+    padding : 5px 0;
+}
+.icon-box{
+	width: 70px;
+	display: inline-block;
+}
+.result-box{
+	vertical-align: middle;
+	display: inline-block;
+	width: 200px;
+}
+.this-result, .pre-result{
+	display: table;
+}
+
+.this-result *, .pre-result *{
+    vertical-align: middle;
+    display: table-cell;
+    white-space: pre;
+    height: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    padding-bottom: 15px;
+}
+.this-result *:first-child, .pre-result *:first-child{
+	text-align: left;
+	width: 70px;
+/* 	color: #dcdcdc; */
+}
+.this-result *:last-child, .pre-result *:last-child{
+    text-align: right;
+    width: 129px;
+    color: #ffc828;
+	
+}
+
+
+.member_last_td {
+/* width : 105px !important;
+padding : 0 !important; 
+padding-top: 5px !important; */
+}
+
+.memberModify, .memberDelete, .status, .order{
+margin-top: 0 !important; 
+margin-bottom: 0 !important;
+} 
+#memberlist{
+	width: 490px;	
+}
+#orderlist {
+	width: 490px;
+}
+/* .none-data{ */
+/* 	height: 167px; */
+/* } */
+/* .th-id{
+	width: 123px;
+	overflow: hidden;
+} */
+/* .mem-name{
+	width: 45px;
+	overflow: hidden;
+} */
+.th-managing{
+	width: 76px;
+}
+#popup input, #popup th, #popup td{
+	padding-top: 5px; 
+	padding-bottom: 5px;
+	vertical-align: middle;
+}
+#popup th:first-child{
+	width: 130px;
+}
+#popup input{
+	border: none;
+	width: 200px;
+}
+.bottom-report{
+}
+#top5, #orderStatus, #budgetSales{
+	width : 295px;
+	display: inline-block;
+	height: 250px;
+	vertical-align: middle;
+}
+#orderStatus {
+	width:400px;
+}
+#this-year-average{
+	height: 450px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+/* 로그인 페이지 관련 css */
+#adminLoginBody{
+	background-color: #282828 !important;
+}
+#adminLoginWrapper{
+	margin-top : 200px;
+}
+#adminLoginWrapper input[type="text"],
+#adminLoginWrapper input[type="password"],
+#adminLoginWrapper button{
+	width : 380px;
+	margin: 20px auto;
+	border-radius: 0;
+	border: none;
+	height: 41px;
+}
+#adminLoginWrapper button{
+	background-color: #ffc828 !important;
+    color: #282828!important;
+    font-size: 15px;	
+    font-weight: bold;
+}
+.loginMainFont{
+	color: #ffffff; 
+	font-family: 'Open Sans', sans-serif; 
+	font-size: 30px; 
+	font-weight: bold; 
+	display: inline-block;
+	margin-bottom: 50px;
+} 
+#rememberId{
+	text-align: left;
+    margin-left: 2px;
+}
+#rememberIdLabel{
+    vertical-align: top;
+    color: #f0f0f0;
+    line-height: 23px;
+}
+.bottomBar{
+    width: 380px;
+    margin: -3px auto;
+    text-align: left;
+}
+.bottomBar .checkbox{
+	display: inline-block;
+}
+.bottomBar2{
+    display: inline-block;
+    height: 23px;
+    padding-top: 12.5px;
+    vertical-align: top;
+    float: right;
+}
+.bottomBar2 a{
+	color: #a0a0a0;
+}

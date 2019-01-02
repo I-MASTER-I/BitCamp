@@ -1,0 +1,173 @@
+*{
+	padding:0px;
+	margin:0px;
+	box-sizing: border-box;
+    
+/*     임시 css */
+/*     border : 1px solid black;	 */
+}
+#container-all{
+	width: 1000px;
+    margin: 0 auto;
+/*     flex-wrap: wrap; */
+/*     display: flex; */
+/*     justify-content: space-between; */
+}
+#container-top{
+	margin-top : 50px;
+	margin-bottom : 50px;
+}
+.leftBox{
+	vertical-align:top;
+	display:inline-block;
+	width:300px;
+}
+.leftBoxT{
+	height: 93px;
+	text-align:center;
+}
+#icon {
+	font-size:90px;
+}
+.leftBoxB{
+
+	height: 112px; 
+	text-align:center;
+}
+.leftBoxB *{
+	color:#282828;
+}
+#temperature{
+	font-size:65px;
+	font-weight: bold;
+}
+.c{
+	font-size:30px;
+}
+.rightBox{
+	vertical-align:top;
+/* 	height:250px; */
+	width:687px;
+	display:inline-block;
+}
+.rightBoxT{
+	border-bottom: 3px solid #787878;
+    height: 93px; 
+    padding-bottom: 10px
+}
+#city{
+	color:#787878;
+	font-size:27px;
+}
+#weather{
+	font-size:33px;
+	font-weight: bold;
+}
+.rightBoxB{
+	padding-top: 10px;
+	height:112px;
+}
+.rightBoxB *{
+	color:#787878;
+	font-weight: bold;	
+}
+.xbox{
+	display:inline-block;
+}
+.xbox2{
+	display:inline-block;
+	width:570px;
+}
+#knots,#humidity,#clouds{
+	font-size:20px;
+	font-weight:bold;
+	padding-bottom:5px;
+	padding-left:21px;
+}
+.xbox p{
+	font-size:20px;
+	font-weight:bold;
+	padding-bottom:5px;
+}
+#container-bottomB{
+	flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+}
+.weahtherBox{
+	border: 1px solid #dcdcdc;
+    border-radius: 10px 10px 10px 10px;
+    width: 320px;
+    height: 150px;
+    display: inline-block;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+.sBoxT{
+	display: inline-block;
+}
+.sBoxB{
+	text-align: center;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+    padding-top: 20px;	
+}
+.leftsBox{
+	padding-top: 24px;
+    vertical-align: top;
+    text-align: center;
+    display: inline-block;
+    height: 70px;
+    width: 120px;
+}
+.icon{
+	font-size:50px;
+}
+.rightsBox{
+	display: inline-block;
+    height: 70px;
+    width: 170px;
+}
+.cityname{
+	padding-top: 5px;
+    color: #787878;
+    font-size: 12pt;
+}
+.weather{
+	padding-top: 1px;
+    color: #505050;
+    font-size: 20pt;
+    font-weight: bold;
+}
+.temperature{
+	color: #787878;
+    font-size: 12pt;
+}
+
+.knotwrap,.humiditywrap,.cloudswrap{
+	display: inline-block;
+    width: 106px;
+}
+.knot,.humidity,.clouds{
+	font-size: 11pt !important;
+}
+.knotwrap span,.humiditywrap span,.cloudswrap span{
+	color: #a0a0a0;
+    font-weight: 500;
+    font-size: 18pt;
+    vertical-align: top;
+	
+}
+.wi{
+	vertical-align: middle;
+	display: inline-block;
+    font-family: weathericons;
+    font-style: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+}
+.weathericon{
+	font-size:50px;
+}

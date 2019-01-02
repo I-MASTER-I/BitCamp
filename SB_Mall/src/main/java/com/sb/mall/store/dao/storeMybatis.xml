@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.sb.mall.store.dao.StoreDao">
+ 	<insert id="insertSalesBoard"
+ 		parameterType="com.sb.mall.store.model.SalesBoard"
+ 		useGeneratedKeys="true" keyColumn="salesSeq" keyProperty="salesSeq">
+ 		insert into SalesBoard (title,text,viewSeq,writeDate,userSeq)
+ 		value(#{title},#{text},0,now(),#{userSeq})
+ 	</insert>
+ 	<insert id="insertProduct"
+ 		parameterType="com.sb.mall.store.model.Product"
+ 		useGeneratedKeys="true" keyColumn="productSeq" keyProperty="productSeq">
+ 		insert into Product (price,salesSeq,productName,photo,detail) 
+ 		value(#{price},#{salesSeq},#{productName},#{photo},#{detail})
+ 	</insert>
+ 	<insert id="insertGoods" parameterType="HashMap">
+ 		insert into Goods (goodsNo,productSeq,goodsName,goodsPrice,goodsPhoto)
+ 		values 
+ 		<foreach collection="goodsList" item="goods" separator=",">
+ 			(#{goods.goodsNo},#{productSeq},#{goods.goodsName},#{goods.goodsPrice},#{goods.goodsPhoto})
+ 		</foreach>
+ 	</insert>
+ 	<insert id="insertGoodsOption"
+ 		useGeneratedKeys="true" keyColumn="optionSeq" keyProperty="optionSeq">
+ 		insert into GoodsOption (goodsNo,opt1Name,opt1Price,opt2Name,opt2Price)
+ 		values 
+ 		<foreach collection="list" item="opt" separator=",">
+ 			(#{opt.goodsNo},#{opt.opt1Name},#{opt.opt1Price},#{opt.opt2Name},#{opt.opt2Price})
+ 		</foreach>
+ 	</insert>
+ 	<select id="selectProAndSalList" resultType="map">
+ 		SELECT distinct * FROM SalesBoard s,Product p 
+ 		<where>
+ 			<if test="param1!=null">
+ 				(p.productName LIKE CONCAT('%',#{param1},'%') 
+ 				or s.title LIKE CONCAT('%',#{param1},'%')) and
+ 			</if>
+ 			s.salesSeq=p.salesSeq  
+ 		</where>
+ 		order by ${param2} limit #{param3},#{param4}
+ 	</select>
+ 	<select id="selectProAndSal" resultType="map">
+ 		SELECT distinct * FROM SalesBoard s,Product p where s.salesSeq=#{salSeq} 
+ 		and s.salesSeq=p.salesSeq
+ 	</select>
+ 	<select id="selectProductList" resultType="com.sb.mall.store.model.Product">
+ 		SELECT * FROM Product order by productSeq desc
+ 	</select>
+ 	<select id="selectSalBoardList" resultType="com.sb.mall.store.model.SalesBoard">
+ 		SELECT * FROM SalesBoard order by salesSeq desc
+ 	</select>
+ 	<select id="selectGoodsList" resultType="com.sb.mall.store.model.Goods">
+ 		SELECT * FROM Goods where productSeq=#{param1}
+ 	</select>
+ 	<select id="selectGoodsOptionList" resultType="com.sb.mall.store.model.GoodsOption">
+ 		SELECT * FROM GoodsOption where goodsNo=#{param1} order by opt1Name
+ 	</select>
+ 	<select id="selectGoodsOption" resultType="com.sb.mall.store.model.GoodsOption">
+ 		SELECT * FROM GoodsOption 
+ 		<where>
+ 		goodsNo=#{goodsNo} and opt1Name=#{opt1Name} and opt2Name=ifnull(#{opt2Name},'')
+ 		</where>
+ 	</select>
+ 	<select id="checkGoodsOptionIsNull" resultType="com.sb.mall.store.model.GoodsOption">
+ 		SELECT o.goodsNo,opt1Name,o.opt2Name FROM SB_Master.Product p,Goods g,GoodsOption o 
+ 		<where>
+ 		 p.productSeq=#{param1} and p.productSeq=g.productSeq and g.goodsNo=o.goodsNo
+ 		</where>
+ 	</select>
+ 	<select id="countProAndSalList" resultType="int">
+ 		SELECT count(*) from SalesBoard s,Product p 
+ 		<where>
+ 			<if test="value!=null">
+ 				(p.productName LIKE CONCAT('%',#{param1},'%') 
+ 				or s.title LIKE CONCAT('%',#{param1},'%')) and
+ 			</if>
+ 			s.salesSeq=p.salesSeq
+ 		</where>
+ 	</select>
+ 	<select id="selectSalBoard" resultType="com.sb.mall.store.model.SalesBoard">
+ 		SELECT * FROM SalesBoard where salesSeq=#{salSeq}
+ 	</select>
+ 	<update id="updateSalBoardCnt">
+ 		update SalesBoard set viewSeq=viewSeq+1 where salesSeq=#{salSeq}
+ 	</update>
+ 	<update id="updateSalesBoard">
+ 		update SalesBoard set title=#{title},text=#{text} where salesSeq=#{salesSeq}
+ 	</update>
+ 	<delete id="deleteSalesBoard">
+ 		delete from `SalesBoard` where salesSeq=#{salSeq}
+ 	</delete>
+ </mapper>

@@ -1,0 +1,523 @@
+@charset "UTF-8";
+
+* {
+	padding: 0px;
+	margin: 0px;
+	box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+}
+
+#summernote {
+	width: 1000px;
+}
+
+#crowdWriteBigBanner {
+	width: 100%;
+	background-color: #3c3c3c;
+}
+
+#crowdWriteMidBanner {
+	width: 1000px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.rowdWriteBannerH3 {
+	padding-bottom: 30px;
+	padding-top: 70px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: white;
+	font-size: 28pt;
+}
+
+#crowdWriteBixBox {
+	width: 1000px;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+
+#BoardBigBox {
+	display: inline-block;
+}
+
+.goodsMidBox {
+	display: inline-block;
+}
+
+#productBigBox {
+	display: inline-block;
+	width: 560px;
+	margin-bottom: 30px;
+}
+
+#goodsBigBox {
+	display: inline-block;
+}
+
+.goodsTitle {
+	display: inline-block;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	vertical-align: middle;
+}
+
+.goodsListTitle {
+	display: inline-block;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	vertical-align: middle;
+}
+
+.goodsListTitle2 {
+	display: inline-block;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: #ffc828;
+	font-weight: bolder;
+	font-size: 20pt;
+	vertical-align: middle;
+}
+
+.plusMinusbtn {
+	display: inline-block;
+}
+
+.referenceView {
+	float: right;
+	height: 305px;
+	width: 430px;
+	background-color: #f0f0f0;
+	margin-top: 5px;
+	border-radius: 10px;
+}
+
+.referenceView2 {
+	float: right;
+	height: 150px;
+	width: 430px;
+	background-color: #f0f0f0;
+	margin-top: 43px;
+	border-radius: 10px;
+}
+
+.goodsCommandBox {
+	border-top: 2px solid #ffc828;
+	padding-top: 15px;
+	width: 100%;
+}
+
+.crBoardTextH4 {
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+	padding-top: 10.5px;
+	padding-bottom: 10.5px;
+	color: #707070
+}
+
+.optionBigBox {
+	display: inline-block;
+	border-top: 1px solid #f0f0f0;
+	/* margin-top: 10px; */
+	padding-top: 15px;
+	margin-bottom: 40px;
+	width: 100%;
+}
+
+.addGoodsBtnBox {
+	display: inline-block;
+	vertical-align: middle;
+	width: 36px;
+	background-color: #a0a0a0;
+	height: 36px;
+	border-radius: 5px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.addGoodsBtnBox:hover {
+	background-color: #ffc828;
+}
+
+.addGoodsBtnBox:hover .plusProBtnText {
+	color: white !important;
+}
+
+.plusProBtnText {
+	color: white;
+	font-size: 16pt;
+	border-radius: 5px;
+	line-height: 36px;
+	font-weight: bold;
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+}
+
+.addBtnBox {
+	display: inline-block;
+	vertical-align: middle;
+	width: 26px;
+	background-color: #a0a0a0;
+	height: 26px;
+	border-radius: 5px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.addBtnBox:hover {
+	background-color: #ffc828;
+}
+
+.addBtnBox:hover .plusBtnText {
+	color: white;
+}
+
+.optionMiniBox {
+	display: inline-block;
+	vertical-align: top;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.optionTotalBox {
+	display: inline-block;
+}
+
+input {
+	display: inline-block !important;
+	font-size: 12pt !important;
+	font-weight: normal !important;
+	font-family: sans-serif;
+	border: none !important;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.plusBtnText {
+	color: white;
+	font-size: 16pt;
+	border-radius: 5px;
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+	line-height: 26px;
+	font-weight: bold;
+}
+
+.crTextBox {
+	display: inline-block !important;
+	width: 138px;
+	vertical-align: top;
+	margin-top: 5px;
+}
+
+.crInputMiniBox {
+	border: 1px solid #a0a0a0;
+	width: 350px;
+	padding: 10px;
+	display: inline-block;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+	vertical-align: middle;
+}
+
+.crowdInput {
+	width: 100%;
+}
+
+.prPhotoDel, .plusProBtnText, .plusBtnText, .optMinusCss {
+	/* color:#707070 !important; */
+	
+}
+
+input::placeholder {
+	color: #c8c8c8;
+}
+
+.optionInput {
+	width: 100%;
+}
+
+.crOptionTextBox {
+	margin-right: 10px;
+	display: inline-block;
+}
+
+.crInputBox {
+	display: inline-block;
+}
+
+.crHiddenDiv {
+	display: inline-block;
+}
+
+.crInputOptionBox {
+	display: inline-block;
+	border: 1px solid #a0a0a0;
+	padding: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right: 10px;
+	width: 250px;
+	border-radius: 5px;
+}
+
+.crInputOptionBox2 {
+	display: inline-block;
+	border: 1px solid #a0a0a0;
+	padding: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	width: 150px;
+	border-radius: 5px;
+}
+
+.plusBtn {
+	line-height: inherit !important;
+}
+
+.goodsPhotoBox {
+	display: inline-block;
+}
+
+.productPhoto {
+	display: inline-block;
+	width: 410px;
+}
+
+.crInputMidBox {
+	display: inline-block;
+}
+
+.crInputHiddenBox {
+	display: none;
+}
+
+.optMinusCss {
+	padding-top: 7px;
+	font-size: 18pt;
+	border-radius: 5px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	color: white;
+}
+
+.crPhotoPlus {
+	text-align: center;
+	display: inline-block;
+	width: 45px;
+	height: 45px;
+	background-color: #a0a0a0;
+	vertical-align: middle;
+	border-radius: 5px;
+	margin-left: 3px;
+	cursor: pointer;
+}
+
+.crPhotoPlus:hover {
+	color: white !important;
+	background-color: #ffc828;
+}
+
+.crPhotoPlus:hover .prPhotoDel {
+	color: white !important;
+}
+
+.prPhotoDel {
+	text-decoration: none !important;
+	/* padding: 9px; */
+	line-height: 45px;
+	font-size: 16pt;
+	color: white;
+	border-radius: 5px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	font-weight: bold;
+}
+
+.goodsTitleBox {
+	display: inline-block;
+	margin-bottom: 15px;
+}
+
+.optTitleBox {
+	display: inline-block;
+	margin-bottom: 10px;
+}
+
+.optDelBtn2 {
+	display: inline-block;
+	float: right;
+	width: 150px;
+	height: 43px;
+	background-color: #a0a0a0;
+	text-align: center;
+	/* margin-right: 3px; */
+	margin-top: 3px;
+	border-radius: 5px;
+	margin-left: 98px;
+	cursor: pointer;
+}
+
+.optDelBtn2:hover {
+	background-color: #ffc828;
+}
+
+.optDelBtn2:hover .optMinusCss {
+	color: white !important;
+}
+
+.AddedGoodsDel {
+	display: inline-block;
+	background-color: #a0a0a0;
+	vertical-align: middle;
+	width: 26px;
+	height: 26px;
+	text-align: center;
+	border-radius: 5px;
+}
+
+.AddedGoodsH6 {
+	display: inline-block;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	font-size: 16pt;
+	color: white;
+}
+
+.goodsListTitleBox1 {
+	display: inline-block;
+	margin-bottom: 10px;
+}
+
+.superGoods {
+	display: inline-block;
+	width: 1000px;
+}
+
+.writeCrowdBox {
+	text-align: right;
+	margin-bottom: 40px;
+}
+
+.writeBtn {
+	padding: 10px 20px;
+	font-size: 14pt;
+	font-weight: bold;
+	background-color: #a0a0a0;
+	border: none;
+	color: white;
+	border-radius: 5px;
+}
+
+/* 리모컨 */
+#writeRemote {
+	position: fixed;
+	width: 280px;
+	left: 0px;
+	top: 33%;
+	padding: 10px;
+	background-color: #a0a0a0;
+	border-radius: 0px 10px 10px 0px;
+}
+
+.remoteAddBox {
+	
+}
+
+.remoteList {
+	margin-top: 10px;
+}
+
+.remoteImgBox, .remoteNameBox, .remoteDelBox {
+	display: inline-block;
+}
+
+.remoteImgBox {
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
+	border-radius: 5px;
+	overflow: hidden;
+	vertical-align: middle;
+}
+
+.rmtImg {
+	width: 50px;
+	height: 50px;
+	vertical-align: middle;
+}
+
+.remoteNameBox {
+	/* height: 50px; */
+	vertical-align: middle;
+}
+
+.remoteName {
+	padding-top: 17px;
+	padding-bottom: 17px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.remoteDelBox {
+	float: right;
+	padding-top: 18px;
+	padding-bottom: 18px;
+}
+
+.remoteDel {
+	color: #ffc828;
+}
+
+.remoteDel:hover {
+	color: white;
+	cursor: pointer;
+}
+
+.rmtNm {
+	display: inline-block;
+	font-size: 12pt;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: white;
+	width: 120px;
+	overflow: hidden;
+}
+
+.rmtTitle2 {
+	display: inline-block;
+	font-size: 12pt;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color: white;
+}
+
+.rmtPri {
+	display: inline-block;
+	font-size: 10pt;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	line-height: 15pt;
+	color: white;
+}
+
+.remoteAddGoods {
+	color: #ffc828;
+}
+
+.remoteAddGoods:hover {
+	color: white;
+	cursor: pointer;
+}

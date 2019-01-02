@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+/* *{
+	Test용
+	border: 1px solid black;
+}  */
+
+.all_Button{
+    color: #787878;
+    font-weight: bold;
+    padding: 0 16px;
+    margin-left: 3px;
+    padding-bottom: 3px;
+    background: none;
+    border: 1px solid #c8c8c8;
+    border-radius: 4px;
+	}
+.all_Button:hover{
+	background-color: #a0a0a0;
+	color: #f0f0f0;
+}
+
+
+#freeboard_wrap_1 {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+#freeboard_wrap_2 {
+	margin: 8% auto;
+}
+
+
+
+
+#freeboard_Header {
+}
+/*<<Start of #freeboard_Header>>*/
+
+#header_Input{
+	border: 0px solid;
+    width: 100%;
+    padding: 4px 5px;
+	font-weight: bold;
+}
+#header_Input::placeholder {
+    color: #c8c8c8;
+}
+
+#header_Input:focus {
+    outline: 0.5px solid #dcdcdc;
+    border-radius: 6px !important;
+}
+#header_hr{
+	color: #ffc828;
+    border: 1px solid;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+/*<<End of #freeboard_Header>>*/
+
+.panel
+{
+	margin-bottom: 0;
+}
+
+#freeboard_Content {
+	margin: 5px 0px;
+	overflow: hidden;
+}
+/*<<Start of freeboard_Content>>*/
+
+/*<<End of freeboard_Content>>*/
+
+
+
+#freeboard_Footer {
+	margin-top: 10px;
+}
+/*<<Start of freeboard_Content>>*/
+#footer_button_Cancel{
+	float: right;
+	vertical-align: top;
+}
+#footer_button_Write{
+	float: right;
+	vertical-align: top;
+}
+/*<<End of freeboard_Content>>*/
+
+
+
+
+

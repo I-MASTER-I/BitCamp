@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.sb.mall.admin.adminMember.dao.AdminMemberDao">
+
+	<!-- 회원수 -->
+	<select id="selectMemberVOCount" resultType="int">
+		select count(*) from
+		(select
+		userSeq
+		from
+		MemberInfo
+		where
+		<if test="search != '-1'">
+			(
+			userId like '%${search}%' ||
+			userName like '%${search}%'
+			||
+			address1 like
+			'%${search}%' ||
+			address2 like '%${search}%' ||
+			phone
+			like
+			'%${search}%'
+			) and
+		</if>
+		<if test="gradeNum > -1">
+			gradeNum = #{gradeNum} AND
+		</if>
+		DATE(regDate) <![CDATA[>]]>
+		DATE(#{param1} -
+		INTERVAL 1 DAY)
+		AND DATE(regDate) <![CDATA[<]]>
+		DATE(#{param2} + INTERVAL 1
+		DAY)) R;
+	</select>
+
+	<!-- 회원 조회 -->
+	<select id="selectMemberVOList"
+		resultType="com.sb.mall.admin.adminMember.model.MemberVO">
+		select
+		date_format(regDate,
+		'%Y-%m-%d') regDate,
+		userSeq,
+		userId,
+		userName,
+		phone,
+		ifnull(concat(address1, address2),
+		'') address,
+		gradeNum,
+		gender,
+		userAmount
+		from
+		MemberInfo
+		where
+		<if test="search != '-1'">
+			(
+			userId like '%${search}%' ||
+			userName like '%${search}%'
+			||
+			address1 like
+			'%${search}%' ||
+			address2 like '%${search}%' ||
+			phone
+			like
+			'%${search}%'
+			) and
+		</if>
+		<if test="gradeNum > -1">
+			gradeNum = #{gradeNum} AND
+		</if>
+		DATE(regDate) <![CDATA[>]]>
+		DATE(#{param1} - INTERVAL 1 DAY)
+		AND DATE(regDate) <![CDATA[<]]>
+		DATE(#{param2} + INTERVAL 1 DAY)
+		order by regDate desc limit #{param3},
+		#{param4};
+	</select>
+
+	<!-- 회원등급 업데이트 -->
+	<update id="changeGradeNum">
+		UPDATE `MemberInfo` SET
+		`gradeNum` = '${param2}'
+		WHERE
+		<foreach collection="memberArray" item="userSeq" open="("
+			close=")" separator=" OR ">
+			`userSeq` ='${userSeq}'
+		</foreach>
+	</update>
+
+	<!-- 회원 삭제 -->
+	<delete id="memberDelete">
+		DELETE FROM `MemberInfo`
+		WHERE
+		<foreach collection="memberArray" item="userSeq" open="("
+			close=")" separator=" OR ">
+			`userSeq` ='${userSeq}'
+		</foreach>
+	</delete>
+
+</mapper> 
+ 

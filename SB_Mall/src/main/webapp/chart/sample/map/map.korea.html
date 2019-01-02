@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="charset=utf-8;"/>
+
+    <script src="../../dist/chart.js"></script>
+</head>
+<body >
+
+<div id="map_korea"></div>
+
+<script id="script_code">
+    var d = [{
+        id: "충북",
+        value: 50
+    }, {
+        id: "서울",
+        value: 500
+    }, {
+        id: "인천",
+        value: 200
+    }, {
+        id: "대전",
+        value: 150
+    }, {
+        id: "부산",
+        value: 90
+    }, {
+        id: "대구",
+        value: 250
+    }];
+
+    jui.ready([ "chart.builder" ], function(chart) {
+        c = chart("#map_korea", {
+            width : 500,
+            height : 650,
+            padding : 0,
+            axis : [{
+                map : {
+                    path : "../../img/map/korea-500x650.svg",
+                    width : 500,
+                    height : 650
+                },
+                data : d
+            }],
+            brush : [{
+                type : "map.bubble",
+                colors : function(d) {
+                    if(d.value > 300) {
+                        return "linear(top) #ff686c,0.9 #fa5559";
+                    } else if(d.value > 100) {
+                        return "linear(top) #ff9d46,0.9 #ff7800";
+                    }
+
+                    return "linear(top) #9694e0,0.9 #7977C2";
+                }
+            }, {
+                type : "map.selector",
+                activeEvent : "map.click"
+            }]
+        });
+	})
+</script>
+
+
+</body>
+</html>

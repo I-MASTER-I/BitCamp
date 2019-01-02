@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sb.mall.FreeBoard.dao.FreeBoardDao">
+ 		
+ 	
+ 	<select id="selectAll_FreeBoard" resultType="com.sb.mall.FreeBoard.model.FreeBoard">
+ 		select * from FreeBoard order by boardSeq desc
+ 	</select>
+ 	
+ 	<!-- Create -->
+    <insert id="insert_FreeBoard" parameterType="com.sb.mall.FreeBoard.model.FreeBoard"
+    useGeneratedKeys="true" keyProperty="boardSeq">
+    	
+    	insert into FreeBoard (userSeq,boardTitle,boardContent,writerName,viewSeq)
+		values (#{userSeq}, #{boardTitle}, #{boardContent}, #{writerName}, #{viewSeq})
+    </insert>
+    
+ 	<!-- Read:게시글 번호로 해당 게시글 조회 select*from FreeBoard where boardSeq = 4; -->
+ 	<select id="select_FreeBoard" resultType="com.sb.mall.FreeBoard.model.FreeBoard">
+ 		select*from FreeBoard where boardSeq = #{boardSeq}
+ 	</select>
+ 	
+ 	<!-- Update -->
+ 	<update id="update_FreeBoard" parameterType="com.sb.mall.FreeBoard.model.FreeBoard">
+ 		<!-- update FreeBoard set boardTitle = 1234 , boardContent = 1234 where boardSeq = 22; -->
+ 		update FreeBoard set boardTitle=#{boardTitle} , boardContent = #{boardContent} where boardSeq = #{boardSeq}
+ 	</update>
+ 	
+ 	<!-- Delete -->
+	<delete id="delete_FreeBoard">
+        delete from FreeBoard where boardSeq = #{boardSeq}
+    </delete>
+    
+    <!-- 조회수 증가 2018.12.06 -->
+ 	<update id="update_viewCount" parameterType="com.sb.mall.FreeBoard.model.FreeBoard">
+ 		<!-- update FreeBoard set boardTitle = 1234 , boardContent = 1234 where boardSeq = 22; -->
+ 		update FreeBoard set viewSeq=viewSeq+1 where boardSeq = #{boardSeq}
+ 	</update>
+	
+	
+</mapper>

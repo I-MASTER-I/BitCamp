@@ -1,0 +1,64 @@
+*{
+	padding:0px;
+	margin:0px;
+	box-sizing: border-box;
+}
+.containerAll{
+	width:800px;
+	margin:0 auto;
+}
+.containerSub{
+	margin-top:200px;
+}
+
+
+.mainbox{
+	padding-top: 20px;
+	text-align: center;
+	border: thin solid #a0a0a0;
+	margin-top:50px;
+}
+.namebox,.phonebox{
+    font-size: 12pt;
+    width: 235px;
+    height: 30.23px;
+}
+label{
+	padding-right: 60px;
+	font-size: 20pt;
+}
+.selectbox{
+	
+    margin-top: 35px;
+    margin-bottom: 20px;
+	text-align: center;
+}
+.submitbox{
+    margin-right: 30px;
+}
+button{
+	color: #f0f0f0;
+    background-color: #505050;
+    width: 95px;
+    height: 35px;
+    border: none;
+    cursor: pointer;
+
+}
+.w3-container{
+	min-height: 220px !important;
+}
+.w3-card-4{
+	box-shadow: none !important;
+	border: thin solid #a0a0a0 !important;
+    margin-top: 150px !important;
+}
+.w3-block{
+	background-color: #202020!important;
+}
+.w3-round, .w3-round-medium{
+	    border-radius: unset !important;
+}
+#loginBtn{
+	margin-bottom: 16px!important;
+}

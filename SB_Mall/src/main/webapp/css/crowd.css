@@ -1,0 +1,258 @@
+@charset "UTF-8";
+
+*{
+	box-sizing: border-box;
+}
+.boardMidBox{
+	margin: 0 0 60px 0;
+    /* padding: 10px 0; */
+    display: inline-block;
+}
+.boardPhotoBox{
+	width: 310px;
+    border-radius: 10px;
+    height: 310px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.boardPhoto{
+	width: 100%;
+}
+.viewImg{
+	width: 50px;
+}
+/* .commonBannerBox{
+	text-align: center;
+	    width: 100%;
+    background-color: #3c3c3c;
+}
+.rowdCommonBannerH3{
+    padding-bottom: 30px;
+    padding-top: 100px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: white;
+    font-size: 28pt;
+} */
+.crBoardBigBox{
+	width: 1000px;
+	margin: 0 auto;
+	margin-bottom: 100px;
+}
+.crBoardList{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-top: 25px;
+    border-top: 1px solid #c8c8c8;
+}
+.userOptBox{
+	padding-top: 50px;
+    padding-bottom: 20px;
+    margin: 30px 0 0 0;
+    width: 1000px;
+}
+.selectBox{
+	vertical-align: middle;
+}
+.searchBigBox{
+	display: inline-block;
+	float: right;
+}
+.searchText{
+	vertical-align: middle;
+	font-size: 12pt;
+	color:#707070;
+	
+}
+.searchBox{
+    border: 1px solid #3c3c3c;
+    padding: 6px 6px;
+    vertical-align: middle;
+    width: 250px;
+    border-radius: 6px 0 0 6px;
+}
+.search{
+	font-size: 12pt;
+	border:none;
+	width: 100%;
+}
+.searchBtnBox{
+	height: 34px;
+    vertical-align: middle;
+    background-color: #3c3c3c;
+    width: 36px;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+}
+.searchBtn{
+    padding: 7px;
+    /* display: table-cell; */
+    /* border: none; */
+    width: 34px;
+}
+
+.boardTitleBox{
+	display: inline-block;
+    max-width: 310px;
+	
+}
+.boardTitle{
+    display: inline-block;
+    color: #282828;
+    font-size: 14pt;
+}
+.viewBox{
+	display: inline-block;
+	float: right;
+}
+.ib{
+	display: inline-block;
+}
+.viewImg{
+	vertical-align: middle;
+	width: 20px;
+}
+.viewH6{
+	vertical-align: middle;
+	font-size: 10pt;
+	color:#a0a0a0;
+	font-weight: normal;
+}
+.titleBox{
+	margin-bottom: 5px;
+    height: 45px;
+}
+.targetBox{
+	
+}
+.targetBar{
+	height: 3px;
+	background-color: #f0f0f0;
+	margin-bottom: 5px;
+}
+.achieveBar{
+	width: 10%;
+	height:3px;
+	background-color: #ffc828;
+}
+.priceBox{
+	margin-bottom: 5px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.price{
+    color: #a0a0a0;
+    font-weight: normal;
+    display: inline-block;
+    font-size: 11pt;
+}
+
+.targetPcBox{
+	display: inline-block;
+	margin-right: 5px;
+}
+.leftDayBox{
+	float: right;
+}
+.achHigh{
+    color: #ffc828;
+    font-size: 14pt;
+}
+.achMid{
+	color:#a0a0a0;
+	font-weight: normal;
+}
+.pagingBox{
+	text-align: center;
+}
+.pagingBtnBox:hover{
+	background-color: #787878 !important;
+	color:white;
+}
+.pagingBtnBox{
+    text-align: center;
+    border: 1px solid #787878;
+    border-radius: 5px;
+    color: #787878;
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+}
+.nowPage{
+	text-align: center;
+    background-color: #787878 !important;
+    border: 1px solid #787878;
+    border-radius: 5px;
+    color: white;
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    
+}
+.pagingBtn{
+    padding-top: 10px;
+    font-size: 14pt;
+    font-weight: bold;
+    cursor: pointer;
+}
+.addFundingBox{
+	height: 34px;
+    background-color: #3c3c3c;
+    width: 90px;
+    text-align: center;
+    border-radius: 5px;
+    padding-top: 2px;
+    vertical-align: middle;
+}
+.addFundingProduct{
+	color: white;
+    line-height: 34px;
+}
+.chooseViewCntBox{
+    display: inline-block;
+    height: 34px;
+    width: 100px;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #3c3c3c;
+    cursor: pointer;
+}
+
+.chooseViewCnt{
+    display: inline-block;
+    vertical-align: middle;
+    width: 60px;
+    line-height: 30px;
+    margin-top: 3px;
+    color: #3c3c3c;
+    font-weight: bold;
+    font-size: 12pt;
+    
+}
+.selectViewCntBox{
+	display:none;
+	width: 100px;
+    padding: 0 10px;
+    position: absolute;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 15px 3px rgba(0,0,0,0.1);
+}
+.selectViewCnt{
+	cursor: pointer;
+}
+.optBtnViewCnt{
+	width: 12px;
+    vertical-align: middle;
+}
+.viewCnt{
+	display: inline-block;
+    vertical-align: middle;
+    width: 60px;
+    line-height: 30px;
+    margin-top: 3px;
+    color: #3c3c3c;
+    font-weight: bold;
+    font-size: 12pt;
+}

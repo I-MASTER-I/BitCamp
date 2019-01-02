@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+	xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven>
+		<message-converters>
+			<!-- @ResponseBody로 String 처리할때 한글처리 -->
+			<beans:bean
+				class="org.springframework.http.converter.StringHttpMessageConverter">
+				<beans:property name="supportedMediaTypes">
+					<beans:list>
+						<beans:value>text/html;charset=UTF-8</beans:value>
+					</beans:list>
+				</beans:property>
+			</beans:bean>
+		</message-converters>
+	</annotation-driven>
+
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/css/**" location="/css/" />
+	<resources mapping="/img/**" location="/img/" />
+	<resources mapping="/file/**" location="/file/" />
+	<resources mapping="/slick/**" location="/slick/" />
+	<resources mapping="/js/**"
+		location="/WEB-INF/resources/js/**" />
+	<resources mapping="/chart/**" location="/chart/" />
+	<resources mapping="/jui/**" location="/jui/" />
+	<resources mapping="/monthpicker/**" location="/monthpicker/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="defaultEncoding">
+			<beans:value>utf-8</beans:value>
+		</beans:property>
+	</beans:bean>
+
+	<context:component-scan
+		base-package="com.sb.mall" />
+
+	<beans:bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<!-- 
+		<beans:property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<beans:property name="jdbcUrl" value="jdbc:mysql://sb-mall.cu5prbfi9jue.ap-northeast-2.rds.amazonaws.com/SB_Master?useSSL=false&amp;characterEncoding=utf8" />
+		 -->
+		<beans:property name="driverClass" value="net.sf.log4jdbc.DriverSpy" />
+		<beans:property name="jdbcUrl" value="jdbc:log4jdbc:mysql://sb-mall.cu5prbfi9jue.ap-northeast-2.rds.amazonaws.com/SB_Master?useSSL=false&amp;characterEncoding=utf8" />
+		
+		<beans:property name="user" value="SB_Master" />
+		<beans:property name="password" value="qpqp1010-" />
+	</beans:bean>
+	
+	<!-- 콘솔 로그찍기 -->
+	<beans:bean  id="dataSource_log" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+    	<beans:constructor-arg ref="dataSource" />
+    	<beans:property name="logFormatter">
+    	<beans:bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+    		<beans:property name="loggingType" value="MULTI_LINE" />
+    		<beans:property name="sqlPrefix" value="SQL::: " /> 
+    	</beans:bean> 
+    	</beans:property> 
+	</beans:bean >
+
+
+	<!-- PlatformTransactionManager 빈 설정 -->
+	<beans:bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<beans:property name="dataSource" ref="dataSource" />
+	</beans:bean>
+	<!-- @Transactional 애노테이션 활성화 설정 -->
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+
+	<!-- SqlSessionTemplate 등록 -->
+	<beans:bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<beans:constructor-arg index="0"
+			ref="sqlSessionFactory" />
+	</beans:bean>
+	<!-- spring - mybatis 연동설정 -->
+	<beans:bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="mapperLocations">
+		<beans:list>
+			<beans:value>classpath:com/sb/mall/**/mybatis/*.xml</beans:value>
+			<beans:value>classpath:com/sb/mall/**/dao/*.xml</beans:value>
+		</beans:list>
+		</beans:property>
+	</beans:bean>
+
+	<!-- 채팅 관련 -->
+	<beans:bean class="com.sb.mall.chat.service.ChatEchoService" id="ChatEchoHandler"/>
+
+	<!-- <beans:bean id="myHandler" class="com.sb.mall.handler.WebSocket" /> -->
+	
+	<!-- Email 관련 -->
+	<beans:bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+												<!-- JavaMailSenderImpl : Interface -->
+		<beans:property name="host" value="smtp.gmail.com" />
+		<beans:property name="port" value="587" /><!-- 465 or 25 -->
+		<!-- 보내는 사람의 Email ID -->
+		<beans:property name="username" value="bitcamp1114@gmail.com" />
+		<!-- 보내는 사람의 Email Password -->
+		<beans:property name="password" value="bitcamp123!" />
+		<beans:property name="defaultEncoding" value="utf-8" />
+		<beans:property name="javaMailProperties">
+			<beans:props>
+				<beans:prop key="mail.transport.protocol">smtp</beans:prop>
+				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+				<beans:prop key="mail.debug">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+	
+	<beans:bean id="regNoti"
+      class="com.sb.mall.member.service.MemberMailService"/>
+
+	<websocket:handlers>
+		<websocket:mapping path="/echo-ws" handler="ChatEchoHandler" />
+		<websocket:handshake-interceptors>
+			<beans:bean class="com.sb.mall.home.interceptor.ChatHandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+		<!-- HTTPSESSION값을 가져오기 위하여 -->
+		<websocket:sockjs />
+	</websocket:handlers>
+	
+
+	<!-- <websocket:handlers> <websocket:mapping handler="myHandler" path="/echo.do" 
+		/> <websocket:handshake-interceptors> <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" 
+		/> </websocket:handshake-interceptors> </websocket:handlers> -->
+
+	
+	<interceptors>
+		<!-- loginInterceptor 관련 -->
+		<interceptor>
+			<mapping path="/store/**" />
+			<mapping path="/order/**" />
+<!-- 			<mapping path="/admin/**" /> -->
+			<mapping path="/member/**" />
+			<mapping path="/reply**" />
+			<mapping path="/qna/**" />
+			<mapping path="/crowd/**" />
+			<mapping path="/weather/**" />
+			<exclude-mapping path="/member/login" />
+			<exclude-mapping path="/member/join/**" />
+			<exclude-mapping path="/member/find/**" />
+
+			<beans:bean
+				class="com.sb.mall.home.interceptor.AuthCheckInterceptor" />
+		</interceptor>
+		
+		<!-- AdminLoginInterceptor 인터셉터 -->
+		<interceptor>
+			<mapping path="/admin/**" />
+			<exclude-mapping path="/admin/adminLogin" />
+			<beans:bean
+				class="com.sb.mall.home.interceptor.AdminLoginInterceptor" />
+		</interceptor>
+		<!-- 방문자수 조회 인터셉터 -->
+		<interceptor>
+			<mapping path="/**" />
+			<exclude-mapping path="/admin/**" />
+			<beans:bean
+				class="com.sb.mall.home.interceptor.VisitCountInterceptor" />
+		</interceptor>
+	</interceptors>
+	
+	<!-- <<의존설정을 위해 빈객체 등록>> -->
+	<!-- 암호화 -->
+	<beans:bean id="sha256" class="com.sb.mall.member.service.Sha256"></beans:bean>
+	
+	<!-- 복호화 -->
+	<beans:bean id="aES256Util" class="com.sb.mall.member.service.AES256Util">
+	<!-- 키의 길이가 16자리 설정 노출위험이 있어서 클래스 내에서 직접 설정하는것을 권장 -->
+		<!-- <beans:constructor-arg value="0000000000000000" /> -->
+	</beans:bean>
+	
+	<beans:bean id="regNoti2"
+      class="com.sb.mall.member.service.MemberLoginMailService"/>
+
+   <context:component-scan
+      base-package="com.sb.mall" />
+	
+</beans:beans>
+
+
+
+
+

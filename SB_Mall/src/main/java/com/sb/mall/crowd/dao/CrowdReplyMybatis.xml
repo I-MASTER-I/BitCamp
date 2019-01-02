@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sb.mall.crowd.dao.CrowdReplyDao">
+	<insert id="writeReply" parameterType="com.sb.mall.crowd.model.CrowdReply">
+		insert into CrowdReply(crReply, userSeq, crowdBoardSeq,rating) values(#{crReply}, #{userSeq}, #{crowdBoardSeq},#{rating})
+	</insert>
+
+
+	<select id="getReply" resultType="map">
+		select * from CrowdReply r, MemberInfo m where crowdBoardSeq=#{param1} and r.userSeq=m.userSeq order by crRegTime desc limit #{param2},10
+	</select>
+	
+	<select id="getReplyCount" resultType="java.lang.Integer">
+		select count(*) from CrowdReply where crowdBoardSeq=#{crowdBoardSeq} 
+	</select>
+	
+	<!-- <select id="getReplyByreqSeq" resultType="map">
+		select * from Reply where replySeq=#{replySeq}
+	</select> -->
+	
+	<update id="setReplyUpdate" parameterType="com.sb.mall.crowd.model.CrowdReply">
+		update CrowdReply set crReply=#{crReply} where crReplySeq=#{crReplySeq}
+	</update>
+	
+	<delete id="deleteReply" parameterType="java.lang.Integer">
+		delete from CrowdReply where crReplySeq = #{crReplySeq}
+	</delete>
+	
+	<select id="getTotalRating" resultType="int">
+		select ifnull(sum(rating),0) from CrowdReply where crowdBoardSeq=#{crowdBoardSeq} 
+	</select>
+
+</mapper>

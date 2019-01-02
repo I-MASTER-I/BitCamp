@@ -1,0 +1,49 @@
+<html>
+<head><title>XAMPP</title>
+	<link href="./css/jquery-ui.css" rel="stylesheet" type="text/css">
+	<style>
+		#monthpicker {
+			width: 60px;
+		}
+		#btn_monthpicker {
+			background: url('./datepicker.png');
+			border: 0;
+			height: 24px;
+			overflow: hieen;
+			text-indent: 999;
+			width: 24px;
+		}
+	</style>
+</head>
+
+<body>
+	<input id="monthpicker" type="text" />
+	<input type="button" id="btn_monthpicker" value="Month" />
+	
+	<script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="./js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="./js/jquery.mtz.monthpicker.js"></script>
+	<script>
+		/* MonthPicker �샃�뀡 */
+		options = {
+			pattern: 'yyyy-mm', // Default is 'mm/yyyy' and separator char is not mandatory
+			selectedYear: 2014,
+			startYear: 2008,
+			finalYear: 2018,
+		};
+		
+		/* MonthPicker Set */
+		$('#monthpicker').monthpicker(options);
+		
+		/* 踰꾪듉 �겢由��떆 MonthPicker Show */
+		$('#btn_monthpicker').bind('click', function () {
+			$('#monthpicker').monthpicker('show');
+		});
+		
+// 		/* MonthPicker �꽑�깮 �씠踰ㅽ듃 */
+// 		$('#monthpicker').monthpicker().bind('monthpicker-click-month', function (e, month) {
+// 		});
+	</script>
+</body>
+</html>
+	

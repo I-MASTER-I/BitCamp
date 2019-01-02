@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sb.mall.admin.adminMain.dao.AdminMainDao">
+
+	<!-- 총 방문자수 -->
+	<select id="visitCountTotal" resultType="int">
+		select
+		ifnull(sum(visitCount),0) from VisitGuest
+	</select>
+	<!-- 특정일 방문자수 -->
+	<select id="visitCountDay" resultType="int">
+		SELECT
+		ifnull(sum(visitcount),0) FROM VisitGuest WHERE date(visitDate) =
+		date(#{obj})
+	</select>
+	<!-- 오늘의 방문자수 -->
+	<select id="visitCountDayPre" resultType="int">
+		SELECT
+		ifnull(sum(visitcount),0) FROM VisitGuest WHERE date(visitDate) =
+		curDate() - interval #{interval} day
+	</select>
+	<!-- 총 주문수 -->
+	<select id="orderCountTotal" resultType="int">
+		SELECT ifnull(count(*),0) orderCount FROM OrderDetail WHERE status  <![CDATA[>]]>
+		0
+	</select>
+	<!-- 특정일 주문수 -->
+	<select id="orderDayCount" resultType="int">
+		SELECT ifnull(count(*),0) orderCount FROM OrderDetail WHERE
+		date(orderTime) = date(#{obj}) and status  <![CDATA[>]]>
+		0
+	</select>
+	<!-- 오늘의 주문수 -->
+	<select id="orderDayCountPre" resultType="int">
+		SELECT ifnull(count(*),0) orderCount FROM OrderDetail WHERE
+		date(orderTime) = date(now() - interval #{interval} day) and status <![CDATA[>]]>
+		0;
+	</select>
+	<!-- 특정일 매출 -->
+	<select id="salesDay" resultType="Long">
+		SELECT ifnull(sum(totalAmount),0) totalAmount FROM OrderDetail where
+		date(orderTime) = date(#{obj}) and status <![CDATA[>]]>
+		0
+	</select>
+	<!-- 오늘의 매출 -->
+	<select id="salesDayPre" resultType="Long">
+		SELECT ifnull(sum(totalAmount), 0) totalAmount FROM OrderDetail where
+		date(orderTime) = date(now() - interval #{interval} day) and status <![CDATA[>]]>
+		0
+	</select>
+	<!-- 특정달 매출 -->
+	<select id="salesMonth" resultType="Long">
+		SELECT ifnull(sum(totalAmount), 0) totalAmount FROM OrderDetail where
+		month(orderTime) = month(#{obj}) and year(orderTime) = year(#{obj})
+		and status <![CDATA[>]]>
+		0
+	</select>
+	<!-- 이번달 매출 -->
+	<select id="salesMonthPre" resultType="Long">
+		SELECT sum(totalAmount)
+		totalAmount FROM OrderDetail
+		where orderTime <![CDATA[>]]>
+		LAST_DAY((now() - interval #{interval} month) - interval 1 month)
+		and
+		orderTime <![CDATA[<]]>
+		date((now() - interval #{interval} month) + interval 1 day)
+		AND status <![CDATA[>]]>
+		0;
+	</select>
+	<!-- 특정년 매출 -->
+	<select id="salesYear" resultType="Long">
+		SELECT sum(totalAmount) totalAmount FROM OrderDetail where
+		year(orderTime) = year(#{obj}) and status <![CDATA[>]]>
+		0
+	</select>
+	<!-- 올해의 매출 -->
+	<select id="salesYearPre" resultType="Long">
+		SELECT sum(totalAmount) totalAmount FROM OrderDetail where
+		year(orderTime) = year(now() - interval #{interval} year) and status <![CDATA[>]]>
+		0
+	</select>
+	<!-- 특정달 평균 -->
+	<select id="averageMonth" resultType="Long">
+		SELECT sum(totalAmount) / DAYOFMONTH(LAST_DAY(#{obj}) totalAmount FROM
+		OrderDetail WHERE month(orderTime) = month(#{obj}) and year(orderTime)
+		= year(#{obj}) and status <![CDATA[>]]>
+		0
+	</select>
+	<!-- 이번달 평균 -->
+	<select id="averageThisMonth" resultType="Long">
+		SELECT sum(totalAmount) / DAY(NOW()) FROM OrderDetail WHERE
+		month(orderTime) = month(NOW()) and year(orderTime) = year(NOW()) and
+		status <![CDATA[>]]>
+		0
+	</select>
+	<!-- 이전달 평균 -->
+	<select id="averageMonthPre" resultType="Long">
+		SELECT sum(totalAmount) / DAYOFMONTH(LAST_DAY(NOW() - interval
+		#{interval} month)) totalAmount FROM OrderDetail WHERE
+		month(orderTime) = month(now() - interval #{interval} month) and
+		year(orderTime) = year(now() - interval #{interval} month) and status <![CDATA[>]]>
+		0
+	</select>
+	<!-- 주문상태 -->
+	<select id="orderStatus" resultType="map">
+		select * from
+		(SELECT
+		(case
+		when status = 0 then '입금전'
+		when status = 1 then '결제완료'
+		when status = 2
+		then '배송준비'
+		when status = 3 then '배송중'
+		end) status,
+		(case
+		when status = 4
+		then null
+		else count(status)
+		end)
+		count FROM SB_Master.OrderDetail group
+		by status) stat where status is not
+		null;
+	</select>
+	<!-- 특정일 가입자수 -->
+	<select id="joinCount" resultType="int">
+		SELECT count(*) FROM
+		SB_Master.MemberInfo where date(regDate) = date(#{obj});
+	</select>
+	<!-- 오늘의 가입자수 -->
+	<select id="joinCountPre" resultType="int">
+		SELECT count(*) FROM
+		SB_Master.MemberInfo where date(regDate) = date(now() - interval
+		#{interval} day);
+	</select>
+	<!-- 상품별 Top5 -->
+	<select id="productTop5" resultType="map">
+		SELECT goodsName, sum(salePrice) salePrice FROM `Order` a, Goods b,
+		OrderDetail c where a.goodsNo = b.goodsNo and a.orderDetailNum =
+		c.orderDetailNum and c.status <![CDATA[>]]>
+		0 group by goodsName order by salePrice desc limit 5;
+	</select>
+	<!-- 특정년도 월별 매출 -->
+	<select id="salesMonthYear" resultType="map">
+		SELECT a.month month,
+		IFNULL(sum(b.totalAmount), 0) totalAmount FROM Calendar a LEFT JOIN
+		OrderDetail b ON a.month = MONTH(b.orderTime) and YEAR(b.orderTime) =
+		YEAR(#{obj}) GROUP BY a.month;
+	</select>
+	<!-- 이번년도 월별 매출 -->
+	<select id="salesMonthYearPre" resultType="map">
+		SELECT a.month month,
+		IFNULL(sum(b.totalAmount), 0) totalAmount FROM Calendar a LEFT JOIN
+		OrderDetail b ON a.month = MONTH(b.orderTime) and YEAR(b.orderTime) =
+		YEAR(NOW() - INTERVAL #{interval} YEAR) GROUP BY a.month;
+	</select>
+	<!-- 이번년도 월평균 매출 -->
+	<select id="averageMonthYear" resultType="long">
+		select
+		(case
+		when month(now()) = 1
+		then sum(totalAmount)
+		else
+		sum(totalAmount) / month(now() - interval 1 month)
+		end) totalAmount
+		from
+		(SELECT sum(totalAmount) totalAmount FROM OrderDetail
+		where
+		(case
+		when month(now()) = 1
+		then month(orderTime) = month(now())
+		else
+		month(orderTime) <![CDATA[<]]>
+		month(now())
+		end)
+		and year(orderTime) = year(now()) and status <![CDATA[>]]>
+		0 group by month(orderTime)) totalAmount
+	</select>
+	<!-- 이번년도 월별 매출 및 평균 -->
+	<select id="salesMonthThisYearAverage" resultType="map">
+		SELECT a.`monthName` month, IFNULL(sum(b.totalAmount), 0) 매출,
+		(select
+		(case
+		when month(now()) = 1
+		then sum(totalAmount)
+		else sum(totalAmount) /
+		month(now() - interval 1 month)
+		end) 평균
+		from
+		(SELECT sum(totalAmount)
+		totalAmount FROM OrderDetail
+		where
+		(case
+		when month(now()) = 1
+		then
+		month(orderTime) = month(now())
+		else month(orderTime) <![CDATA[<]]>
+		month(now())
+		end)
+		and year(orderTime) = year(now()) and status > 0 group
+		by
+		month(orderTime)) totalAmount) 평균
+		FROM Calendar a LEFT JOIN
+		OrderDetail b
+		ON a.`month` = MONTH(b.orderTime) and YEAR(b.orderTime) =
+		YEAR(NOW() -
+		INTERVAL #{interval} YEAR) and b.status <![CDATA[>]]>
+		0 GROUP BY a.`month`;
+	</select>
+	<!-- 이번주 전주 평균 방문자수 비교 -->
+	<select id="visitCountWeek" resultType="map">
+		SELECT
+		DATE_FORMAT(DATE_SUB(visitDate, INTERVAL (DAYOFWEEK(visitDate)-1)
+		DAY), '%Y-%m-%d') as start,
+		DATE_FORMAT(DATE_SUB(visitDate, INTERVAL
+		(DAYOFWEEK(visitDate)-7) DAY), '%Y-%m-%d') as end,
+		DATE_FORMAT(visitDate, '%U') AS week,
+		(CASE
+		when now() between
+		DATE_FORMAT(DATE_SUB(visitDate, INTERVAL
+		(DAYOFWEEK(visitDate)-1) DAY),
+		'%Y/%m/%d') and
+		DATE_FORMAT(DATE_SUB(visitDate, INTERVAL
+		(DAYOFWEEK(visitDate)-7)
+		DAY), '%Y/%m/%d')
+		then sum(visitCount) /
+		(WEEKDAY(CURDATE() + 1) + 1)
+		ELSE sum(visitCount) / 7
+		end) average
+		FROM
+		VisitGuest where visitDate between ADDDATE( CURDATE(), -
+		WEEKDAY(CURDATE() + 1) -7 ) and ADDDATE( CURDATE(), -
+		WEEKDAY(CURDATE() + 1) +6 )
+		GROUP BY week order by week desc;
+	</select>
+	<!-- 버젯 대비 월 매출 달성율 -->
+	<select id="budgetSales" resultType="map">
+		SELECT
+		"달성율" title,
+		(bg.${param1} / day(LAST_DAY((now() - interval #{param2} month)))) *
+		day((now() - interval #{param2} month)) max,
+		SUM(totalAmount) value
+		FROM
+		OrderDetail od, Budget bg
+		WHERE date_format(od.orderTime, '%Y') =
+		bg.year and
+		date_format(orderTime, '%Y-%m') = date_format(NOW() -
+		INTERVAL
+		#{param2} MONTH, '%Y-%m')
+		AND status > 0;
+	</select>
+
+</mapper>

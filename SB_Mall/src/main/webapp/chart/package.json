@@ -1,0 +1,73 @@
+{
+  "name": "juijs-chart",
+  "version": "2.1.1",
+  "description": "SVG-based JUI chart that can be used in the browser and Node.js. Support many types of charts. (Dashboard, Map, Topology, Full 3D)",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "dist": "NODE_ENV=production webpack"
+  },
+  "main": "conf/webpack.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/juijs/jui-chart.git"
+  },
+  "keywords": [
+    "HTML5",
+    "NodeJS",
+    "CSS",
+    "JS",
+    "JavaScript",
+    "SVG",
+    "Chart",
+    "Framework",
+    "Web development",
+    "free",
+    "MIT"
+  ],
+  "author": "seogi1004",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/juijs/jui-chart/issues"
+  },
+  "categories": [
+    "Frameworks",
+    "UI"
+  ],
+  "maintainers": [
+    {
+      "name": "Alvin",
+      "email": "alvin@jennifersoft.com"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Jayden",
+      "email": "jayden@jennifersoft.com"
+    },
+    {
+      "name": "Yoha",
+      "email": "yoha@jennifersoft.com"
+    }
+  ],
+  "dependencies": {
+    "juijs": "~2.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-es2015": "^6.24.1",
+    "css": "~2.2.1",
+    "datauri": "~0.8.0",
+    "grunt": "~0.4.5",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-copy": "~0.8.2",
+    "grunt-contrib-qunit": "~0.7.0",
+    "grunt-contrib-uglify": "~0.11.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-curl": "~2.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "load-grunt-tasks": "~3.4.0",
+    "webpack": "^3.12.0",
+    "webpack-dev-server": "^2.11.2"
+  }
+}

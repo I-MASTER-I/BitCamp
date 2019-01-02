@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sb.mall.QnA.dao.QnADao">
+ 		
+ 
+	<!-- 게시판 추가하기 -->
+    <insert id="create" parameterType="com.sb.mall.QnA.model.QnABoard"
+ 		useGeneratedKeys="true" keyProperty="qnaSeq">
+        insert into QnABoard (qtitle,qtext,userSeq)
+ 		value (#{qtitle},#{qtext},#{userSeq})
+    </insert>
+    
+    <!-- 게시판 리스트보기 -->
+    <select id="listAll" resultType="com.sb.mall.QnA.model.QnABoard">
+        select * from QnABoard 
+        order by qnaSeq DESC
+    </select>
+    
+    <!-- 게시판 상세보기 -->
+    <select id="read" resultType="com.sb.mall.QnA.model.QnABoard">
+            select * from QnABoard where qnaSeq = #{qnaSeq}
+    </select>
+ 
+    <!-- 게시판 삭제하기 -->
+    <delete id="delete">
+        delete from QnABoard where qnaSeq = #{qnaSeq}
+    </delete>
+    
+    <!-- 게시판 수정하기 -->
+    <update id="update">
+        update QnABoard set qtitle=#{qtitle} , qtext = #{qtext} where qnaSeq = #{qnaSeq}
+    </update>
+
+	<!-- 게시판 답글달기 (관리자만 가능) -->
+	<update id="reply">
+        update QnABoard set atext = #{atext} where qnaSeq = #{qnaSeq}
+    </update>
+	
+	
+	
+	<!-- <insert id="insertQnABoard" parameterType="com.sb.mall.model.QnABoard" 
+ 		useGeneratedKeys="true" keyColumn="qnaSeq" keyProperty="qnaSeq">
+		insert into QnABoard (qtitle,qtext,atext,qwriteDate,userSeq,qnaSeq)
+ 		value(#{qtitle},#{qtext},#{atext},SYSDATE(),1,#{qnaSeq})
+	</insert> -->
+	
+	<!-- <insert id="insertQnABoard" parameterType="com.sb.mall.model.QnABoard">
+		insert into QnABoard (qtitle, qtext, atext, qwriteDate, userSeq, qnaSeq)
+ 		value(#{qtitle}, #{qtext}, #{atext}, SYSDATE(), #{userSeq}, #{qnaSeq})
+	</insert> -->
+	
+	<!-- <select id="selectQnAList" resultType="map">
+ 		SELECT distinct * FROM QnABoard q, MemberInfo m where q.userSeq=m.userSeq;
+ 	</select>
+	
+	<select id="deleteQnABoardList">
+		DELETE from QnABoard where userSeq = #{userSeq}
+	</select>
+	
+	<select id="updateQnABoardList">
+		UPDATE QnABoard set qtitle = #{qtitle}, qtext = #{qtext}, atext = #{atext} where userSeq = #{userSeq}
+	</select> -->
+	
+	
+</mapper>

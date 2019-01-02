@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.sb.mall.admin.adminStatistics.dao.AdminStatisticsDao">
+
+
+	<!-- loadVisitStatReport.jsp 에서 사용할 쿼리 -->
+	<!-- 맵 객체를 생성해준다. column에서 반환된 값을 property에 지정한 key로 생성하여 javaType에 지정된 
+		값으로 할당한다. -->
+	<resultMap id="getFifthChart" type="java.util.Map">
+		<result column="visitDate" property="visitDate"
+			javaType="java.lang.String" />
+		<result column="visitCount" property="visitCount"
+			javaType="java.lang.Integer" />
+	</resultMap>
+	<resultMap id="getHourlyChart" type="java.util.Map">
+		<result column="visitTime" property="visitTime"
+			javaType="java.lang.String" />
+		<result column="visitCount" property="visitCount"
+			javaType="java.lang.Integer" />
+	</resultMap>
+	<resultMap id="getMonthlyChart" type="java.util.Map">
+		<result column="visitMonth" property="visitMonth"
+			javaType="java.lang.String" />
+		<result column="visitCount" property="visitCount"
+			javaType="java.lang.Integer" />
+	</resultMap>
+	<resultMap id="ageTotal" type="java.util.Map">
+		<result column="age" property="age" javaType="java.lang.String" />
+		<result column="count" property="count"
+			javaType="java.lang.Integer" />
+		<result column="max" property="max"
+			javaType="java.lang.Integer" />
+	</resultMap>
+	<resultMap id="genderTotal" type="java.util.Map">
+		<result column="남성" property="남성" javaType="java.lang.Integer" />
+		<result column="여성" property="여성" javaType="java.lang.Integer" />
+	</resultMap>
+	<resultMap id="countryTotal" type="java.util.Map">
+		<result column="id" property="id" javaType="java.lang.String" />
+		<result column="value" property="value"
+			javaType="java.lang.Integer" />
+	</resultMap>
+	<resultMap id="fifthJoin" type="java.util.Map">
+		<result column="regDate" property="regDate"
+			javaType="java.lang.String" />
+		<result column="count" property="count"
+			javaType="java.lang.Integer" />
+	</resultMap>
+	<resultMap id="monthlyJoin" type="java.util.Map">
+		<result column="regMonth" property="regMonth"
+			javaType="java.lang.String" />
+		<result column="count" property="count"
+			javaType="java.lang.Integer" />
+	</resultMap>
+
+	<!-- 오늘의 방문, 월 방문, 연간 방문 -->
+	<select id="getVisitStatVO"
+		resultType="com.sb.mall.admin.adminStatistics.model.VisitStatVO">
+		select
+		max(dayCount) as dayCount,
+		max(monthCount) as
+		monthCount,
+		max(yearCount) as yearCount
+		from
+		(SELECT
+		ifnull(sum(visitCount), 0) as dayCount,
+		0 as monthCount,
+		0 as yearCount
+		FROM
+		SB_Master.VisitGuest
+		where date(visitDate) = date(#{param1})
+		union
+		all
+		SELECT
+		0 as dayCount,
+		ifnull(sum(visitCount), 0) as monthCount,
+		0 as
+		yearCount
+		FROM
+		SB_Master.VisitGuest
+		where date_format(visitDate, '%Y.%m')
+		= date_format(#{param1}, '%Y.%m')
+		union all
+		SELECT
+		0 as dayCount,
+		0 as
+		monthCount,
+		ifnull(sum(visitCount), 0) as yearCount
+		FROM
+		SB_Master.VisitGuest
+		where year(visitDate) = year(#{param1})) R;
+	</select>
+
+	<!-- // 최근 15일 통계를 불러온다. -->
+	<select id="getFifthChart" resultMap="getFifthChart">
+		select
+		date(visitDate) visitDate,
+		sum(visitCount) visitCount
+		from
+		VisitGuest
+		where date(visitDate) <![CDATA[<=]]>
+		date(#{param1})
+		and visitDate <![CDATA[>=]]>
+		date(#{param1} - interval 15 day)
+		group by date(visitDate);
+	</select>
+
+	<!-- // 시간대별 통계를 불러온다. -->
+	<select id="getHourlyChart" resultMap="getHourlyChart">
+		select
+		time_format(visitDate, '%H시') visitTime,
+		sum(visitCount) visitCount
+		from VisitGuest
+		where date(visitDate) = date(#{param1})
+		group by
+		hour(visitDate);
+
+	</select>
+
+	<!-- // 이번년도 통계를 불러온다. -->
+	<select id="getMonthlyChart" resultMap="getMonthlyChart">
+		SELECT
+		a.`monthName`
+		visitMonth,
+		ifnull(SUM(visitCount), 0) visitCount
+		FROM Calendar a
+		LEFT
+		JOIN
+		VisitGuest b ON a.`month` = MONTH(b.visitDate)
+		and
+		YEAR(visitDate) =
+		YEAR(#{param1})
+		GROUP BY a.`month`
+		;
+	</select>
+
+	<!-- 오늘의 가입자, 월 가입자, 연간 가입자 -->
+	<select id="memberStatVO"
+		resultType="com.sb.mall.admin.adminStatistics.model.MemberStatVO">
+		select
+		max(dayCount) as dayCount,
+		max(monthCount) as
+		monthCount,
+		max(yearCount) as yearCount
+		from
+		(SELECT
+		ifnull(count(userName), 0) as dayCount,
+		0 as monthCount,
+		0 as yearCount
+		FROM
+		MemberInfo
+		where date(regDate) = date(#{param1})
+		union
+		all
+		SELECT
+		0 as
+		dayCount,
+		ifnull(count(userName), 0) as monthCount,
+		0 as
+		yearCount
+		FROM
+		MemberInfo
+		where date_format(regDate, '%Y.%m')
+		= date_format(#{param1},
+		'%Y.%m')
+		union all
+		SELECT
+		0 as dayCount,
+		0 as
+		monthCount,
+		ifnull(count(userName), 0) as yearCount
+		FROM
+		MemberInfo
+		where
+		year(regDate) = year(#{param1})) R;
+	</select>
+
+	<!-- // total 회원 통게를 불러온다. -->
+	<!-- //연령별 통계 -->
+	<select id="ageTotal" resultMap="ageTotal">
+		select * from
+		(SELECT
+		concat(FLOOR((YEAR(NOW()) - YEAR(BIRTH)) / 10) * 10, '대') age,
+		COUNT(BIRTH) count
+		FROM
+		MemberInfo a
+		WHERE
+		BIRTH != ''
+		GROUP BY age
+		HAVING
+		age != 0) R,
+		(select max(count) max from
+		(SELECT
+		concat(FLOOR((YEAR(NOW()) - YEAR(BIRTH)) / 10) * 10, '대') age,
+		COUNT(BIRTH) count
+		FROM
+		MemberInfo a
+		WHERE
+		BIRTH != ''
+		GROUP BY age
+		HAVING
+		age != 0) C) C;
+	</select>
+
+	<!-- //성별 통계 -->
+	<select id="genderTotal" resultMap="genderTotal">
+		select sum(남성) 남성, sum(여성) 여성
+		from
+		(select
+		CASE WHEN gender = '남성' THEN count END AS 남성,
+		CASE WHEN
+		gender = '여성' THEN count END AS 여성
+		from
+		(SELECT gender, count(gender)
+		count FROM SB_Master.MemberInfo group by
+		gender) gen) R;
+	</select>
+
+	<!-- //지역별 통계 -->
+	<select id="countryTotal" resultMap="countryTotal">
+		SELECT
+		(CASE
+		WHEN
+		LEFT(address1, 2) = '서울' THEN LEFT(address1, 2)
+		WHEN LEFT(address1, 2)
+		= '부산' THEN LEFT(address1, 2)
+		WHEN LEFT(address1, 2) = '대전' THEN
+		LEFT(address1, 2)
+		WHEN LEFT(address1, 2) = '대구' THEN LEFT(address1, 2)
+		WHEN LEFT(address1, 2) = '대전' THEN LEFT(address1, 2)
+		WHEN
+		LEFT(address1, 2) = '인천' THEN LEFT(address1, 2)
+		WHEN LEFT(address1, 2)
+		= '광주' THEN LEFT(address1, 2)
+		WHEN LEFT(address1, 2) = '울산' THEN
+		LEFT(address1, 2)
+		WHEN LEFT(address1, 2) = '경기' THEN LEFT(address1, 2)
+		WHEN LEFT(address1, 2) = '강원' THEN LEFT(address1, 2)
+		WHEN
+		LEFT(address1, 2) = '제주' THEN LEFT(address1, 2)
+		WHEN LEFT(address1, 4)
+		= '충청북도' THEN '충북'
+		WHEN LEFT(address1, 4) = '충청남도' THEN '충남'
+		WHEN
+		LEFT(address1, 4) = '전라북도' THEN '전북'
+		WHEN LEFT(address1, 4) = '전라남도'
+		THEN '전남'
+		WHEN LEFT(address1, 4) = '경상북도' THEN '경북'
+		WHEN LEFT(address1,
+		4) = '경상남도' THEN '경남'
+		ELSE '그외'
+		END) id,
+		COUNT(*) value
+		FROM
+		MemberInfo
+		GROUP BY id;
+	</select>
+
+	<!-- // 최근 15일 회원 통계를 불러온다. -->
+	<select id="fifthJoin" resultMap="fifthJoin">
+		select
+		date(regDate) regDate,
+		count(userName) count
+		from MemberInfo
+		where
+		date(regDate) <![CDATA[<=]]>
+		date(#{param1})
+		and regDate <![CDATA[>=]]>
+		date(#{param1} - interval 15 day)
+		group by date(regDate)
+	</select>
+
+	<!-- // 월별 회원 통계를 불러온다. -->
+	<select id="monthlyJoin" resultMap="monthlyJoin">
+		SELECT
+		a.`monthName` regMonth,
+		ifnull(count(userName),
+		0) count
+		FROM Calendar a
+		LEFT JOIN
+		MemberInfo b ON a.`month` =
+		MONTH(b.regDate)
+		and
+		YEAR(regDate) = YEAR('2018.12.12')
+		GROUP BY
+		a.`month`
+		;
+	</select>
+
+
+
+
+
+
+
+
+</mapper> 
+ 

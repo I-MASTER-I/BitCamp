@@ -1,0 +1,141 @@
+@charset "UTF-8";
+
+/* *{ */
+/* 	border: 1px solid #a0a0a0; */
+/* }  */
+
+.all_Input{
+	margin: 20px 0;
+	font-size:15pt;
+	border: 0px solid #dcdcdc;
+    padding: 4px 5px;
+	border-bottom: 2px solid #dcdcdc;
+	box-sizing: border-box;
+}
+.all_input::placeholder {
+/* 	font-weight: bold; */
+    color: #c8c8c8;
+}
+.all_input:focus {
+    outline: 0.5px solid #dcdcdc;
+    border-radius: 6px !important;
+}
+
+.all_Button{
+    color: #3c3c3c;
+    font-weight: bold;
+    padding: 5px 20px;
+    /* margin-left: 3px; */
+    /* padding-bottom: 3px; */
+    background: none;
+    border: 1px solid #3c3c3c;
+    border-radius: 4px;
+    text-align: center;
+}
+.all_Button:hover{
+	background-color: #a0a0a0;
+	color: #f0f0f0;
+	cursor: pointer;
+}
+
+
+#freeboard_wrap_1 {
+	width: 600px;
+	margin: 0 auto;
+}
+
+#freeboard_wrap_2 {
+	width: 600;
+    margin: 70px auto;
+}
+
+
+
+
+#freeboard_Header {
+	
+}
+/*<<Start of #freeboard_Header>>*/
+
+/*<<End of #freeboard_Header>>*/
+
+
+
+#freeboard_Content {
+	text-align: center;
+}
+/* #freeboard_Content *{ */
+/* 	box-sizing: border-box; */
+/* } */
+/*<<Start of freeboard_Content>>*/
+#email_ID_wrap,
+#password_ID_wrap,
+#userName_IDuserBirthday_ID_wrap,
+#phoneNumber_IDuserGender_ID_wrap,
+#content_addressAPI_wrap{
+	margin: 0 auto;
+    width: 600px;
+}
+
+#email_ID, #password_ID,
+#reconfirmPassword_ID{
+	width: 100%;
+}
+#userName_ID, #userBirthday_ID{
+	width: 48%;
+}
+#phoneNumber_ID, #zipNo{
+	width : 474px;
+}
+#userGender_ID{
+    width: 106px;
+    height: 37px;
+    margin-top: 6px;
+    font-size: 18px;
+    padding-left: 18px;
+}
+#userGender_ID:hover{
+	cursor: pointer;
+}
+#searchZip{
+	border-radius: 0;
+    border: thin solid #a0a0a0;
+    width: 106px;
+    height: 37px;
+    margin-top: 6px;
+    font-size: 15px;
+}
+#roadAddrPart1,
+#addrDetail{
+	width: 100%;
+}
+
+
+#footer_button_Send, #footer_button_Cancel{
+	width: 140px;
+    height: 37px;
+    border: thin solid #a0a0a0;
+    border-radius: 0;
+    margin: 0 5px;
+}
+
+/*<<End of freeboard_Content>>*/
+
+
+
+#freeboard_Footer {
+	text-align: center;
+}
+/*<<Start of freeboard_Footer>>*/
+
+.socialRegister_Icon{
+	color: #00aaff;
+    height: 27px;
+    display: inline-block;
+}
+/*<<End of freeboard_Footer>>*/
+
+
+
+
+

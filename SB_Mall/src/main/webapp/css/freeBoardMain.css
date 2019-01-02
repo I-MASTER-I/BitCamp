@@ -1,0 +1,186 @@
+@charset "UTF-8";
+
+/* *{
+	border: 1px solid black;
+}  */
+
+.all_Button{
+    color: #3c3c3c;
+    font-weight: bold;
+    padding: 5px 20px;
+    /* margin-left: 3px; */
+    /* padding-bottom: 3px; */
+    background: none;
+    border: 1px solid #3c3c3c;
+    border-radius: 4px;
+}
+.all_Button:hover{
+	background-color: #a0a0a0;
+	color: #f0f0f0;
+	cursor: pointer;
+}
+
+
+#freeboard_wrap_1 {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+#freeboard_wrap_2 {
+	width: 1000px;
+    margin: 3% auto;
+}
+
+
+
+
+#freeboard_Header {
+	padding: 15px 0px;
+	border-bottom: 3px solid #ffc828;
+	
+}
+/*<<Start of #freeboard_Header>>*/
+#icon_search_img {
+    background-color: #3c3c3c;
+    height: 25px;
+    width: 25px;
+    vertical-align: top;
+    border-radius: 0 5px 5px 0;
+    padding: 4px;
+}
+#icon_Search_span {
+	float: right;
+}
+#icon_Search_input {
+	height: 25px;
+    width: 200px;
+    vertical-align: top;
+    border-radius: 3px;
+    border: 1px solid #3c3c3c;
+    border-right: none;
+    border-radius: 5px 0 0 5px;
+}
+/*<<End of #freeboard_Header>>*/
+
+
+
+#freeboard_Content {
+    margin-bottom: 20px;
+}
+/*<<Start of freeboard_Content>>*/
+.contentBox {
+    border-bottom: 1px solid #dcdcdc;
+    padding-bottom: 10px;
+}
+
+/*==Start of contentBox==*/
+
+/*상단 :게시글 번호, 날짜*/
+.content_up {
+	/*상단 폰트설정*/
+    font-size: 15px;
+    font-weight: bold;
+    color: #a0a0a0;
+    margin-top: 10px;
+}
+
+/*상단 : 게시글 번호*/
+.boardSeqBox {
+	float: left;
+    width: 80px;
+    font-weight: 200;
+    font-size: 10pt;
+    margin-right: 10px;
+}
+
+/*상단 : 날짜*/
+.boardWriteDateBox {
+    font-weight: 200;
+    font-size: 10pt;
+}
+
+/*하단 : 게시글 제목, 조회수, 아이디*/
+.content_down {
+	
+}
+
+/*하단 -제목*/
+.boardTitleBox {
+    width: 750px !important;
+    display: inline-block;
+    max-width: inherit;
+    color: #282828;
+    padding: 7px 0 0 0;
+}
+.content_down_rightBox{
+    display: inline-block;
+    float: right;
+    margin-top: 5px;
+}
+.boardTitleFont:link,
+.boardTitleFont:visited,
+.boardTitleFont:active{
+	color: #282828;
+}   
+.boardTitleFont {
+    font-size: 15px;
+    color: 282828;
+}
+
+/*하단 -조회수*/
+.viewSeqBox {
+	display: inline-block;
+    font-size: 10pt;
+    font-weight: normal;
+    color: #a0a0a0;
+    width: 50px;
+    vertical-align: middle;
+}
+.viewSeqImg{
+	width: 15px;
+}
+
+/*하단 -아이디*/
+.writerNameBox {
+    display: inline-block;
+    max-width: inherit;
+    font-size: 10pt;
+    text-align: right;
+    width: 140px;
+    font-weight: normal;
+    color: #a0a0a0;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.content_hr{
+	border: 1px solid;
+    color: #c8c8c8;
+}
+
+/*==End of contentBox==*/
+/*<<End of freeboard_Content>>*/
+
+
+
+#freeboard_Footer {
+	text-align: right;
+}
+/*<<Start of freeboard_Content>>*/
+#button_write {
+	background-color: #ffc828;
+    color: white;
+    padding: 8px 18px;
+    border: none;
+    font-size: 10pt;
+}
+#button_write:hover{
+	background-color: #a0a0a0 !important;
+	color: #f0f0f0;
+}
+/*<<End of freeboard_Content>>*/
+
+
+
+
+

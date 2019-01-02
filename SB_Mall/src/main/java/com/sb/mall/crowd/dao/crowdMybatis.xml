@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.sb.mall.crowd.dao.CrowdDao">
+	
+	<insert id="insertCrowdBoard"
+		parameterType="com.sb.mall.crowd.model.CrowdBoard"
+		useGeneratedKeys="true" keyColumn="crowdBoardSeq" keyProperty="crowdBoardSeq">
+		
+	insert into CrowdBoard (userSeq,title,text,writeDate,salesDay,targetPrice)
+	value(#{userSeq},#{title},#{text},#{writeDate},#{salesDay},#{targetPrice})
+	
+	</insert>
+	
+	<insert id="insertCrowdProduct"
+		parameterType="com.sb.mall.crowd.model.CrowdProduct"
+		useGeneratedKeys="true" keyColumn="crProductSeq" keyProperty="crProductSeq">
+		
+		insert into CrowdProduct (crowdBoardSeq, productNo, crPrice,crProductName,crPhoto,crDetail) 
+ 		value(#{crowdBoardSeq},#{productNo}, #{crPrice},#{crProductName},#{crPhoto},#{crDetail})
+ 		
+	</insert>
+	
+	<insert id="insertCrowdProductNull"
+		parameterType="com.sb.mall.crowd.model.CrowdProduct"
+		useGeneratedKeys="true" keyColumn="crProductSeq" keyProperty="crProductSeq">
+		
+		insert into CrowdProduct (crowdBoardSeq, productNo, crPrice,crProductName,crDetail) 
+ 		value(#{crowdBoardSeq},#{productNo}, #{crPrice},#{crProductName},#{crDetail})
+ 		
+	</insert>
+	
+	<insert id="insertCrowdGoods"
+		parameterType="com.sb.mall.crowd.model.CrowdGoods">
+		
+		insert into CrowdGoods (goodsNo,crProductSeq,goodsName,crGoodsPrice,goodsPhoto) 
+ 		value(#{goodsNo},#{crProductSeq},#{goodsName},#{crGoodsPrice},#{goodsPhoto})
+		
+	</insert>
+	
+	<insert id="insertCrowdOption"
+		parameterType="com.sb.mall.crowd.model.CrowdOption">
+		
+		insert into CrowdGoodsOption (goodsNo,opt1Name,crOptAmount,crOpt1Price,opt2Name,crOpt2Price) 
+ 		value(#{goodsNo},#{opt1Name},#{crOptAmount},#{crOpt1Price},#{opt2Name},#{crOpt2Price})
+		
+	</insert>
+	
+	<insert id="insertCrProductPhoto" parameterType="com.sb.mall.crowd.model.CrowdProductPhoto">
+		insert into CrowdProductPhoto (productNo,crPhotoList) value(#{productNo},#{crPhotoList})
+	</insert>
+	
+	<insert id="insertCrProductPhotoNo" parameterType="com.sb.mall.crowd.model.CrowdProductPhoto">
+		insert into CrowdProductPhoto (productNo) value(#{productNo})
+	</insert>
+	
+	<select id="selectCrowdBoard" resultType="map">
+		select * from CrowdBoard b,CrowdProduct p where b.crowdBoardSeq = p.crowdBoardSeq order by writeDate desc limit #{param1},#{param2}
+	</select>
+	
+	<select id="getBoardPageCnt" resultType="int">
+		select count(*) from CrowdBoard
+	</select>
+	
+	<select id="getDetailBoard" resultType="map">
+		select * from CrowdBoard b,CrowdProduct p where b.crowdBoardSeq=#{crowdBoardSeq} and b.crowdBoardSeq = p.crowdBoardSeq
+	</select>
+	
+	<select id="getDetailGoods" resultType="map">
+		select * from CrowdGoods where crProductSeq = #{crProductSeq}
+	</select>
+	
+	<select id="getDetailPhoto" resultType="map">
+		select * from CrowdProductPhoto where productNo = #{productNo}
+	</select>
+	
+	<select id="getPhotoCount" resultType="int">
+		select count(*) from CrowdProductPhoto where productNo = #{productNo}
+	</select>
+	
+	<update id="setViewSeqUp">
+		update CrowdBoard set viewSeq=viewSeq+1 where crowdBoardSeq=#{crowdBoardSeq}
+	</update>
+	
+	<select id="getViewSeq" resultType="int">
+		select viewSeq from CrowdBoard where crowdBoardSeq = #{crowdBoardSeq}
+	</select>
+	
+	<select id="getDelivery" resultType="String">
+		select salesDay from CrowdBoard where crowdBoardSeq = #{crowdBoardSeq}
+	</select>
+	
+	<select id="getOpt1" resultType="map">
+		select * from CrowdGoodsOption where goodsNo = #{goodsNo} group by opt1Name
+	</select>
+	
+	<select id="getOpt2" resultType="map">
+		select * from CrowdGoodsOption where goodsNo = #{param1} and opt1Name = #{param2}
+	</select>
+	
+	<select id="getUserName" resultType="String">
+		select userName from MemberInfo where userSeq = #{userSeq}
+	</select>
+	
+	<insert id="insertOrderDetail2" statementType="CALLABLE">
+		{ call insert_CartJson(#{orders}) }
+	</insert>
+	
+	<insert id="insertOrderList" parameterType="com.sb.mall.crowd.model.CrowdOrder">
+		insert into CrowdOrder (orderDetailNum, userSeq, crowdBoardSeq, goodsNo, optionSeq, quantity, onePrice, salePrice)
+		value(#{orderDetailNum},#{userSeq},#{crowdBoardSeq},#{goodsNo},#{optionSeq},#{quantity},#{onePrice},#{salePrice})
+	</insert>
+	
+	<select id="getOrderPrice" resultType="int">
+		select (crGoodsPrice+ crOpt1Price+ crOpt2Price) as price from CrowdGoods g, CrowdGoodsOption o where g.goodsNo = #{param1} and g.goodsNo=o.goodsNo and optionSeq=#{param2};
+	</select>
+	
+	<insert id="insertOrderDetail" parameterType="com.sb.mall.crowd.model.CrowdOrderDetail">
+		insert into CrowdOrderDetail (orderDetailNum, userSeq, orderTime, totalAmount, cardNo, yearDay, cardPassword, birthNo, zipCode, orderAddress1,orderAddress2, orderPhone, orderRequest, orderName)
+		values(#{orderDetailNum},#{userSeq},now(),#{totalAmount},#{cardNo},#{yearDay},#{cardPassword},#{birthNo},#{zipCode},#{orderAddress1}, #{orderAddress2}, #{orderPhone},#{orderRequest},#{orderName})
+	</insert>
+	
+	<update id="updateOrderedPriceByOrder">
+		update CrowdBoard set totalOrderPrice=totalOrderPrice+#{param1} where crowdBoardSeq=#{param2}
+	</update>
+	<update id="updateOrderedOptionByOrder">
+		update CrowdGoodsOption set crOptAmount=crOptAmount-#{param1} where optionSeq=#{param2}
+	</update>
+	
+</mapper>

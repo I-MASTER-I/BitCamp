@@ -1,0 +1,11 @@
+{
+  "name": "juijs-core",
+  "version": "2.1.0",
+  "main": [
+    "dist/core.min.js"
+  ],
+  "ignore": [
+    ".jshintrc",
+    "**/*.txt"
+  ]
+}

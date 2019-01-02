@@ -1,0 +1,700 @@
+@charset "UTF-8";
+
+/* *{
+	border: 1px solid #a0a0a0;
+}   */
+.form-control {
+	text-align: center;
+}
+
+#wrapper {
+	width: 1200px;
+	margin: 100px auto 50px auto;
+}
+
+.all_Button {
+	font-weight: bold;
+	border-radius: 5px;
+	color: white;
+	background-color: #a0a0a0;
+	border: none;
+	width: 245px;
+	height: 40px;
+	font-size: 10pt;
+}
+
+.all_Button:hover {
+	background-color: #505050;
+	color: white;
+	cursor: pointer;
+}
+
+/*<<Start of #freeboard_Header>>*/
+#freeboard_Header {
+	margin: 70px 0;
+}
+
+#fb_Header_UserID {
+	width: 500px;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 25pt;
+	font-weight: bold;
+	color: #282828;
+}
+/*<<End of #freeboard_Header>>*/
+
+/*<<Start of freeboard_Content>>*/
+#freeboard_Content {
+	width: 500px;
+	margin: 0px auto;
+}
+
+.fbContent {
+	margin: 20px 0;
+}
+
+.content_Font1 {
+	width: 150px;
+	color: #787878;
+	font-size: 12pt;
+	font-weight: normal;
+	display: inline-block;
+}
+
+.content_Font2 {
+	color: #282828;
+	font-size: 14pt;
+	font-weight: bold;
+	display: inline-block;
+}
+
+#content_button_wrap {
+	text-align: center;
+	padding-bottom: 30px;
+	margin-top: 40px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+/*<<End of freeboard_Content>>*/
+#freeboard_Footer {
+	text-align: center;
+}
+
+.myLine {
+	height: 1px;
+	background-color: #dcdcdc;
+}
+
+.myModalUnit {
+	margin-bottom: 10px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.myModalH3 {
+	display: inline-block;
+	font-size: 12pt;
+	font-weight: normal;
+	width: 120px;
+	color: #787878;
+	margin-top: 8px;
+}
+
+.myInputBox {
+	display: inline-block;
+	padding: 5px 10px;
+	border: 1px solid #787878;
+	border-radius: 5px;
+	width: 300px;
+	box-sizing: border-box;
+}
+
+.myInput {
+	font-size: 10pt;
+	color: #282828;
+	width: 100%;
+	background-color: inherit;
+	border: none !important;
+}
+
+.modal-dialog {
+	display: none;
+	position: fixed;
+	top: 0px !important;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+	width: 500px;
+	margin: 0 auto;
+	padding: 35px 25px;
+	box-sizing: border-box;
+	background-color: white;
+	border-radius: 10px;
+	margin-top: 8%;
+}
+
+.modal-header {
+	border: none;
+	margin-bottom: 25px;
+	text-align: center;
+}
+
+.modal-title {
+	font-size: 16pt;
+	display: inline-block;
+	border-bottom: 3px solid #ffc828;
+	padding-bottom: 3px;
+}
+
+.modal-body {
+	margin-top: 20px;
+	margin-bottom: 30px;
+	overflow: hidden;
+}
+
+.modal-footer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.myModalbtn {
+	width: 220px;
+	border: none;
+	background-color: #a0a0a0;
+	color: white;
+	height: 35px;
+	border-radius: 5px;
+	font-size: 12pt;
+}
+
+.myModalbtn:hover {
+	background-color: #505050;
+	color: white;
+}
+
+.memberModify {
+	
+}
+
+.modal1Box, .modal2Box {
+	display: none;
+	margin: 0 auto;
+	background-color: rgba(0, 0, 0, 0.6);
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0px;
+	padding-top: 10%;
+}
+
+.modal1SubBox {
+	width: 450px;
+	margin: 7% auto;
+	background-color: white;
+	padding: 20px 30px;
+	box-sizing: border-box;
+	border-radius: 10px;
+}
+
+.modal1SubBox {
+	width: 450px;
+	margin: 0 auto;
+	background-color: white;
+	padding: 20px 30px;
+	box-sizing: border-box;
+	border-radius: 10px;
+}
+
+.modal1Unit1 {
+	text-align: center;
+	font-size: 14pt;
+}
+
+.modal1UserId {
+	margin: 25px 0;
+}
+
+.modal1Unit2 {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.modal1H4 {
+	display: inline-block;
+	margin-right: 10px;
+	margin-top: 10px;
+	margin-bottom: 0px;
+	vertical-align: middle;
+	color: #787878;
+	font-weight: normal;
+}
+
+.modal1InputBox {
+	display: inline-block;
+	padding: 5px 10px;
+	border-radius: 5px;
+	width: 260px;
+	box-sizing: border-box;
+	border: 1px solid #787878;
+}
+
+.modal1Input {
+	border: none;
+	font-size: 12pt;
+	width: 100%;
+}
+
+.modal1BtnBox {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	margin-top: 15px;
+	margin-bottom: 20px;
+}
+
+.modal1Btn {
+	width: 49%;
+	height: 35px;
+	background-color: #a0a0a0;
+	border: none;
+	border-radius: 5px;
+	font-size: 10pt;
+	font-weight: 500;
+	color: white;
+}
+
+.modal1Btn:hover {
+	background-color: #505050;
+	color: white;
+}
+
+.pwCheckBox {
+	text-align: center;
+}
+
+.pwCheckSuccess {
+	color: #ffc828;
+	font-size: 10pt;
+	padding: 0px 0 20px 0;
+	font-weight: normal;
+}
+
+.pwCheckFail {
+	color: #f03c00;
+	font-size: 10pt;
+	padding: 0px 0 20px 0;
+	font-weight: normal;
+}
+
+.rockInputBox {
+	background-color: #dcdcdc;
+	border: none;
+}
+
+#orderPage {
+	width: 1000px;
+	margin: 0 auto;
+	border-bottom: 1px solid #505050;
+	padding-bottom: 10px;
+	margin-bottom: 15px;
+}
+
+#orderDetailTable {
+	border-collapse: collapse;
+}
+
+#orderDetailTable th, #orderDetailTable td {
+	/* border: thin solid #282828; */
+	
+}
+
+#orderDetailTable tr:not (:first-child ):hover {
+	cursor: pointer;
+	background-color: #c8c8c8;
+}
+
+#tableName:hover {
+	cursor: pointer;
+}
+
+#loadOrderList th, #loadOrderList td {
+	border: thin solid #282828;
+}
+
+#loadOrderList {
+	margin: 30px auto;
+}
+
+#orderTable {
+	
+}
+
+.myOrderTopBox {
+	
+}
+
+.myOrderContent {
+	
+}
+
+.orderDetailNum {
+	font-size: 10pt;
+	padding: 5px 10px;
+}
+
+.myGoodsAddress {
+	width: 35%;
+}
+
+.myGoodsName {
+	width: 20%;
+}
+
+.myPageOrderImg {
+	width: 40px;
+}
+
+.pagination {
+	text-align: center;
+}
+
+.page-item {
+	display: inline-block;
+	cursor: pointer;
+}
+
+.page-link {
+	color: #505050;
+	line-height: 30px;
+}
+
+#currentPage {
+	line-height: 30px;
+	color: white;
+}
+
+.tableName {
+	
+}
+
+.odPrice {
+	
+}
+
+.modTopBox {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	border-bottom: 2px solid #505050;
+	margin-bottom: 8px;
+	padding-bottom: 3px;
+}
+
+.modTable {
+	display: inline-block;
+	text-align: center;
+	padding: 5px 0;
+	font-size: 14pt;
+}
+
+.modDate {
+	width: 8%;
+	text-align: left;
+}
+
+.modOrderNum {
+	width: 12%;
+}
+
+.modAddress {
+	width: 38%;
+}
+
+.modGoodsName {
+	width: 12%;
+}
+
+.modPayment {
+	width: 6%;
+}
+
+.modStatus {
+	width: 7%;
+}
+
+.modOrderPrice {
+	width: 10%;
+	text-align: right;
+}
+
+.myOrderUnit {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.myOrderUnit:hover {
+	background-color: #dcdcdc;
+	cursor: pointer;
+}
+
+.myOrderPixel {
+	display: inline-block;
+	padding: 10px 0;
+	font-size: 14pt;
+}
+
+.pixelDate {
+	width: 8%;
+}
+
+.pixelOrderNum {
+	width: 12%;
+}
+
+.pixelAddress {
+	width: 38%;
+}
+
+.pixelGoodsName {
+	width: 12%;
+}
+
+.pixelPayment {
+	width: 6%;
+	text-align: center;
+}
+
+.pixelStatus {
+	width: 7%;
+	text-align: center;
+}
+
+.pixelOrderPrice {
+	width: 10%;
+	text-align: right;
+}
+
+.myOrderList {
+	font-size: 10pt;
+	font-weight: normal;
+	color: #282828;
+}
+
+.activePaging {
+	background-color: #505050 !important;
+	width: 30px;
+	height: 30px;
+	border-radius: 5px;
+	color: white;
+	font-weight: bold;
+	box-sizing: border-box;
+	vertical-align: middle;
+}
+
+.tableNameBox {
+	width: 1000px;
+	margin: 0 auto;
+	margin-top: 50px;
+	margin-bottom: 15px;
+}
+
+.pageSpare {
+	width: 30px;
+	height: 30px;
+	border: 1px solid #505050;
+	border-radius: 5px;
+	box-sizing: border-box;
+	vertical-align: middle;
+}
+
+.pagePrevious {
+	margin-right: 10px;
+}
+
+.pageNext {
+	margin-left: 10px;
+}
+
+.olTopMidBox {
+	width: 1000px;
+	box-sizing: border-box;
+	margin: 0 auto;
+	background-color: white;
+	padding: 50px 50px 35px 50px;
+	border-radius: 10px;
+}
+
+.olTopBigBox {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	position: fixed;
+	top: 0px;
+	padding-top: 10%;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.olTopBox {
+	width: 900px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+	border-bottom: 2px solid #505050;
+	margin: 0 auto;
+}
+
+.olTop {
+	display: inline-block;
+	font-size: 11pt;
+	/* border: 1px solid; */
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.olOrderNum {
+	width: 7%;
+	text-align: left;
+}
+
+.olGoodsImg {
+	width: 7%;
+	text-align: center;
+}
+
+.olGoodsNo {
+	width: 11%;
+	text-align: center;
+}
+
+.olGoodsName {
+	width: 12%;
+}
+
+.olQuan {
+	width: 5%;
+	text-align: center;
+}
+
+.olOption1 {
+	text-align: center;
+	width: 10%;
+}
+
+.olOption2 {
+	width: 10%;
+	text-align: center;
+}
+
+.olSumPrice {
+	width: 15%;
+}
+
+.olRefund {
+	width: 7%;
+	text-align: center;
+}
+
+.olUnit {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	/* vertical-align: middle; */
+	margin-bottom: 10px;
+	width: 900px;
+}
+
+.orderDetailNum {
+	box-sizing: border-box;
+	display: inline-block;
+	padding: 5px 0;
+	line-height: 40px;
+	font-weight: normal;
+	height: 40px;
+}
+
+.refund {
+	width: 100%;
+	background-color: #a0a0a0;
+	border: none;
+	border-radius: 5px;
+	color: white;
+	height: 30px;
+	line-height: initial !important;
+}
+
+.refund:hover {
+	background-color: #505050;
+}
+
+.olRefundH5 {
+	
+}
+
+.olContentBigBox {
+	width: 915px;
+	max-height: 200px;
+	overflow: auto;
+}
+
+.olCloseBox {
+	text-align: center;
+	margin-top: 5px;
+	padding-top: 25px;
+	border-top: 1px solid #505050;
+}
+
+.olCloseBtn {
+	font-size: 12pt;
+	padding: 5px 50px;
+	background-color: #a0a0a0;
+	color: white;
+	border-radius: 5px;
+	border: none;
+}
+
+.olCloseBtn:hover {
+	background-color: #505050;
+}
+
+.olTopestBox {
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.olTopest {
+	font-size: 18pt;
+	padding-bottom: 3px;
+	border-bottom: 3px solid #ffc828;
+	display: inline-block;
+	color: #282828;
+}
+
+.olTextRight {
+	text-align: right;
+}
+
+.olOverFlowBox {
+	width: 900px;
+	overflow: hidden;
+}
+
+.myModalBigBox {
+	width: 465px;
+	height: 300px;
+	overflow: auto;
+}
+
+/*<<Start of freeboard_Footer>>*/
+
+/*<<End of freeboard_Footer>>*/

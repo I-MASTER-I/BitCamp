@@ -1,0 +1,602 @@
+@charset "UTF-8";
+
+* {
+	padding: 0px;
+	magin: 0px;
+	box-sizing: border-box;
+}
+/* #crowdWriteBigBanner{
+	width:100%;
+	background-color: #3c3c3c;
+}
+#crowdWriteMidBanner{
+	width:1000px;
+	margin: 0 auto;
+	text-align: center;
+}
+.rowdWriteBannerH3{
+	padding-bottom:30px;
+	padding-top:70px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	color:white;
+	font-size: 28pt;
+} */
+.BDBigLayout {
+	width: 1000px;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
+.BDtopLayout {dis
+	
+}
+
+.BDImgBox {
+	display: inline-block;
+	width: 490px;
+}
+
+.thumBigImgBox {
+	width: 490px;
+	height: 490px;
+	border-radius: 20px;
+	border: 1px solid #f0f0f0;
+	overflow: hidden;
+}
+
+.thumBigImg {
+	width: 100%;
+}
+
+.thumBox {
+	width: 490px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.thumMiniBox {
+	width: 90px;
+	height: 90px;
+	border-radius: 10px;
+	border: 1px solid #f0f0f0;
+	overflow: hidden;
+}
+
+.thumImg {
+	width: 100%;
+}
+
+.BDInfoLayout {
+	float: right;
+	display: inline-block;
+	width: 480px;
+}
+
+.BDTitleBox {
+	border-bottom: 3px solid #282828;
+	padding-bottom: 5px;
+	margin-bottom: 10px;
+}
+
+.prNoBox {
+	margin-bottom: 5px;
+}
+
+.prNo {
+	color: #a0a0a0;
+	font-weight: lighter;
+	display: inline-block;
+	font-size: 10pt;
+}
+
+.ratingPart {
+	display: inline-block;
+	margin-right: 80px;
+}
+
+.ratingImg {
+	width: 20px;
+	vertical-align: middle;
+}
+
+.ratingH5 {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 16pt;
+	color: #ffc828;
+	margin-left: 5px;
+	font-weight: bold;
+	margin-top: 3px;
+}
+
+.ratingH6 {
+	display: inline-block;
+	vertical-align: sub;
+	font-size: 12pt;
+	color: #c8c8c8;
+	/* margin-left: 5px; */
+	font-weight: normal;
+	/* margin-top: 3px; */
+}
+
+.like {
+	display: inline-block;
+	vertical-align: middle;
+	color: #c8c8c8;
+	font-size: 13pt;
+	margin-right: 7px;
+	padding-right: 10px;
+	border-right: 2px solid;
+}
+
+.viewSeqBox {
+	float: right;
+	display: inline-block;
+	margin-top: 5px;
+}
+
+.viewSeqImg {
+	width: 25px;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+.viewSeqH6 {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 12pt;
+	color: #a0a0a0;
+	font-weight: normal;
+	margin-top: 3px;
+}
+
+.proDetailBox {
+	margin-top: 50px;
+	clear: both;
+	text-align: center;
+}
+
+.detTitleBox {
+	padding-bottom: 5px;
+	border-bottom: 2px solid #282828;
+}
+
+.ratingBixBox {
+	margin-bottom: 20px;
+}
+
+.basicInfoBox {
+	padding: 20px;
+	border: 1px solid #a0a0a0;
+	border-radius: 10px;
+	margin-bottom: 20px;
+}
+
+.priceF {
+	display: inline-block;
+	font-size: 18pt;
+}
+
+.won {
+	display: inline-block;
+	font-size: 12pt;
+}
+
+.delivImg {
+	width: 1000px;
+}
+
+.detTitle {
+	color: #282828;
+	font-size: 20pt;
+	text-align: left;
+}
+
+}
+}
+.deli, .deliDate {
+	display: inline-block;
+}
+
+.priceInfoBox {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #c8c8c8;
+}
+
+.deliInfoBox {
+	padding-top: 15px;
+}
+
+.deli {
+	font-size: 12pt;
+	font-weight: normal;
+	color: #787878;
+	margin-bottom: 5px;
+}
+
+.deliMini {
+	font-size: 12pt;
+	font-weight: normal;
+	color: #a0a0a0;
+	font-weight: 300;
+}
+
+.deliDate {
+	font-size: 12pt;
+	color: #ffc828;
+}
+
+.AllSelectBox {
+	display: inline-block;
+	min-height: 220px;
+	width: 100%;
+}
+
+.SbigBox {
+	width: 100%;
+	display: inline-block;
+	margin-bottom: 5px;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.opt1PickBox {
+	width: 100%;
+	display: none;
+	margin-bottom: 5px;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.opt2PickBox {
+	width: 100%;
+	display: none;
+	margin-bottom: 5px;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.Sbox {
+	width: 100%;
+	display: inline-block;
+	background-color: #dcdcdc;
+}
+
+.Stitle {
+	color: white;
+	display: inline-block;
+	padding: 14px 0 12px 15px;
+	width: 80px;
+	font-weight: normal;
+	vertical-align: middle;
+}
+
+.Spick {
+	color: white;
+	display: inline-block;
+	margin: 14px 0 12px;
+	padding-left: 15px;
+	width: 220px;
+	border-left: 2px solid white;
+	font-size: 12pt;
+	vertical-align: middle;
+}
+
+.Spick2 {
+	color: white;
+	display: inline-block;
+	padding: 14px 0 12px 15px;
+	text-align: right;
+	width: 125px;
+	font-size: 12pt;
+	vertical-align: middle;
+}
+
+.SLbigbox {
+	display: none;
+	position: absolute;
+	background-color: white;
+	width: 480px;
+	z-index: 11;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.1);
+}
+
+.SL {
+	background-color: white;
+	margin-bottom: 1px;
+	display: inline-block;
+	width: 100%;
+	padding: 10px 25px;
+}
+
+.SLbox {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	border-radius: 5px;
+	overflow: hidden;
+	vertical-align: middle;
+}
+
+.SLboxOpt {
+	display: inline-block;
+	height: 40px;
+	vertical-align: middle;
+}
+
+.SLimg {
+	width: 40px;
+	vertical-align: middle;
+}
+
+.SLname {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 10px;
+	color: #3c3c3c;
+}
+
+.SLleft {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.SLright {
+	float: right;
+	display: inline-block;
+}
+
+.SLprice {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 40px;
+	color: #787878;
+	font-weight: normal;
+	font-size: 12pt;
+}
+
+.SimgBox {
+	display: inline-block;
+	float: right;
+	padding: 15px 15px 0 0;
+}
+
+.Simg {
+	width: 15px;
+}
+
+.hidden {
+	display: none;
+}
+
+.optTitleBox {
+	display: table;
+}
+
+.optname {
+	display: table-cell;
+	padding-top: 3px;
+	vertical-align: middle;
+}
+
+.optAmount {
+	text-align: left;
+	display: inline-block;
+	/* padding-top: 3px; */
+	vertical-align: middle;
+	font-size: 12pt;
+	color: #c8c8c8;
+	line-height: 40px;
+	font-weight: 300;
+	width: 90px;
+	margin-left: 10px;
+}
+
+.bagBigBox {
+	
+}
+
+.fundingBigBox {
+	
+}
+
+.loveBox {
+	display: inline-block;
+}
+
+.loveImg {
+	width: 25px;
+	vertical-align: middle;
+}
+
+.fundingBtnBox {
+	display: table;
+	background-color: #dcdcdc;
+	width: 100%;
+	float: right;
+	text-align: center;
+	height: 50px;
+	border-radius: 10px;
+	vertical-align: middle;
+}
+
+.fundingBtn {
+	vertical-align: middle;
+	display: table-cell;
+	font-size: 16pt;
+	font-weight: bold;
+	color: white;
+}
+
+.hiddenPick {
+	display: none;
+}
+
+.bagHidden {
+	display: none;
+}
+
+.bag {
+	margin-bottom: 10px;
+	border-top: 1px solid #dcdcdc;
+	padding-top: 10px;
+}
+
+.bagQuanBox {
+	display: inline-block;
+}
+
+.bAddMin {
+	display: inline-block;
+	width: 30px;
+	text-align: center;
+	background-color: #a0a0a0;
+	vertical-align: middle;
+	height: 30px;
+	line-height: 32px;
+	border-radius: 5px 0 0 5px;
+	font-weight: bold;
+	font-size: 14pt;
+	color: white;
+	cursor: pointer;
+}
+
+.bAddQuan {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 31px;
+	border-top: 2px solid #a0a0a0;
+	border-bottom: 2px solid #a0a0a0;
+	vertical-align: middle;
+	color: #282828;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.bAddPlu {
+	display: inline-block;
+	width: 30px;
+	text-align: center;
+	background-color: #a0a0a0;
+	vertical-align: middle;
+	height: 30px;
+	line-height: 33px;
+	border-radius: 0 5px 5px 0;
+	font-weight: bold;
+	font-size: 14pt;
+	color: white;
+	cursor: pointer;
+}
+
+.bagImgBox {
+	width: 50px;
+	height: 50px;
+	border-radius: 5px;
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
+.bagImg {
+	width: 100%;
+}
+
+.bagGoodsBox {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 10px;
+	width: 170px;
+}
+
+.bagGoodsName {
+	color: #282828;
+}
+
+.bagOpt1Name, .bagOpt2Name {
+	display: inline-block;
+	font-weight: normal;
+	color: #a0a0a0;
+}
+
+.bagPriceBox {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: right;
+	width: 100px;
+}
+
+.bagPrice {
+	display: inline-block;
+	color: #282828;
+	font-size: 12pt;
+}
+
+.bagPriceWon {
+	display: inline-block;
+	color: #a0a0a0;
+	font-weight: normal;
+	font-size: 12pt;
+}
+
+.bagDelBigBox {
+	display: inline-block;
+}
+
+.bagDelBox {
+	vertical-align: middle;
+	display: table-cell;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	background: #a0a0a0;
+	border-radius: 5px;
+	float: right;
+	clear: both;
+	margin-top: 10px;
+}
+
+.bAddDel {
+	display: inline-block;
+	line-height: 31px;
+	color: white;
+	font-weight: bold;
+}
+
+.resultBigBox {
+	display: none;
+	padding: 10px 0 20px 0;
+	border-top: 2px solid #ffc828;
+}
+
+.resultTitleBox {
+	display: inline-block;
+	padding: 15px 0 0 0px;
+}
+
+.resultTitle {
+	display: inline-block;
+	font-size: 12pt;
+	color: #282828;
+}
+
+.resultPriceBox {
+	display: inline-block;
+	float: right;
+}
+
+.resultPrice {
+	display: inline-block;
+	color: #ffc828;
+}
+
+.resultPriceWon {
+	display: inline-block;
+	color: #ffc828;
+}

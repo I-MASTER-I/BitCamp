@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.sb.mall.admin.adminOrder.dao.AdminOrderDao">
+
+	<!-- // 일반 주문 및 크라우드펀딩 주문 갯수 -->
+	<select id="selectOrderDetailVOCount" resultType="int">
+		select count(*) from
+		(select
+		od.orderDetailNum
+		from ${tableName} od,
+		MemberInfo mi,
+		<if test="tableName == 'OrderDetail'">
+			`Order` o, Goods g
+		</if>
+		<if test="tableName == 'CrowdOrderDetail'">
+			CrowdOrder o, CrowdGoods g
+		</if>
+		where od.userSeq = mi.userSeq and
+		od.orderDetailNum =
+		o.orderDetailNum
+		and o.goodsNo = g.goodsNo
+		<if test="search != '-1'">
+			and
+			(
+			od.orderDetailNum like
+			'%${search}%' ||
+			od.userSeq like
+			'%${search}%' ||
+			od.orderPhone like
+			'%${search}%' ||
+			od.orderDetailNum
+			like '%${search}%'
+			||
+			od.orderAddress1 like '%${search}%' ||
+			od.orderAddress2 like
+			'%${search}%' ||
+			mi.userName like '%${search}%'
+			||
+			mi.userId like
+			'%${search}%' ||
+			g.goodsName like '%${search}%'
+			)
+		</if>
+		and DATE(od.orderTime) <![CDATA[>]]>
+		DATE(#{param1} - INTERVAL 1 DAY)
+		AND DATE(od.orderTime) <![CDATA[<]]>
+		DATE(#{param2} + INTERVAL 1 DAY)
+
+		<if test="status > -1">
+			AND od.status = #{status}
+		</if>
+		<if test="payment > -1">
+			and od.payment = #{payment}
+		</if>
+
+		and od.orderDetailNum <![CDATA[<>]]>
+		0
+		group by od.orderDetailNum) R;
+	</select>
+
+	<!-- // 일반 주문 및 크라우드펀딩 주문 조회 -->
+	<select id="selectOrderDetailVOList"
+		resultType="com.sb.mall.admin.adminOrder.model.OrderDetailVO">
+		select
+		date_format(od.orderTime, '%Y-%m-%d') orderTime,
+		od.orderDetailNum,
+		od.userSeq,
+		mi.userName,
+		concat(od.orderAddress1,
+		od.orderAddress2) orderAddress,
+		(case
+		when
+		count(g.goodsName) <![CDATA[>]]>
+		1
+		then concat(g.goodsName, ' 외 ',
+		count(g.goodsName) -1)
+		else g.goodsName
+		end) goodsName,
+		od.payment,
+		od.status,
+		od.totalAmount
+		from ${tableName}
+		od,
+		MemberInfo mi,
+		<if test="tableName == 'OrderDetail'">
+			`Order` o, Goods g
+		</if>
+		<if test="tableName == 'CrowdOrderDetail'">
+			CrowdOrder o, CrowdGoods g
+		</if>
+		where od.userSeq = mi.userSeq and
+		od.orderDetailNum =
+		o.orderDetailNum
+		and o.goodsNo = g.goodsNo
+		<if test="search != '-1'">
+			and
+			(
+			od.orderDetailNum like
+			'%${search}%' ||
+			od.userSeq like
+			'%${search}%' ||
+			od.orderPhone like
+			'%${search}%' ||
+			od.orderDetailNum
+			like '%${search}%'
+			||
+			od.orderAddress1 like '%${search}%' ||
+			od.orderAddress2 like
+			'%${search}%' ||
+			mi.userName like '%${search}%'
+			||
+			mi.userId like
+			'%${search}%' ||
+			g.goodsName like '%${search}%'
+			)
+		</if>
+		and DATE(od.orderTime) <![CDATA[>]]>
+		DATE(#{param1} - INTERVAL 1 DAY)
+		AND DATE(od.orderTime) <![CDATA[<]]>
+		DATE(#{param2} + INTERVAL 1 DAY)
+
+		<if test="status > -1">
+			AND od.status = #{status}
+		</if>
+		<if test="payment > -1">
+			and od.payment = #{payment}
+		</if>
+		and o.refund = 0
+		and od.orderDetailNum <![CDATA[<>]]>
+		0
+		group by od.orderDetailNum order by
+		od.orderTime desc limit #{param4},
+		#{param5};
+	</select>
+
+	<!-- 상세 상품 조회 -->
+	<select id="selectOrderVOList"
+		resultType="com.sb.mall.admin.adminOrder.model.OrderVO">
+		SELECT
+		o.orderDetailNum,
+		o.userSeq,
+		m.userName,
+		o.orderSeq,
+		g.goodsPhoto,
+		g.goodsNo,
+		g.goodsName,
+		o.quantity,
+		ifnull(go.opt1Name, '') opt1Name,
+		ifnull(go.opt2Name, '') opt2Name,
+		o.salePrice
+		FROM
+		<if test="tableName == 'OrderDetail'">
+			`Order` o,
+		</if>
+		<if test="tableName == 'CrowdOrderDetail'">
+			CrowdOrder o,
+		</if>
+		${param2} g, MemberInfo
+		m,
+		${param3} go
+		where o.goodsNo = g.goodsNo
+		and
+		o.userSeq = m.userSeq
+		and
+		o.optionSeq = go.optionSeq
+		and o.refund = 0
+		and
+		orderDetailNum =
+		#{param4};
+	</select>
+
+	<!-- // 주문상태 업데이트 -->
+	<update id="changeStatus">
+		UPDATE `${param3}` SET
+		`status` = '${param2}'
+		WHERE
+		<foreach collection="orderDetailArray" item="orderDetailNum"
+			open="(" close=")" separator=" OR ">
+			`orderDetailNum` ='${orderDetailNum}'
+		</foreach>
+
+	</update>
+
+	<!-- 반품 상품 갯수 -->
+	<select id="selectReturnVOCount" resultType="int">
+		select count(*) from
+		(SELECT
+		o.orderSeq
+		FROM
+		<if test="tableName == 'Order'">
+			OrderDetail od,
+			`Order` o,
+			Goods g,
+			GoodsOption go,
+
+		</if>
+		<if test="tableName == 'CrowdOrder'">
+			CrowdOrderDetail od,
+			CrowdOrder o,
+			CrowdGoods g,
+			CrowdGoodsOption go,
+		</if>
+		MemberInfo m
+		where o.goodsNo =
+		g.goodsNo
+		and o.orderDetailNum =
+		od.orderDetailNum
+		and o.userSeq =
+		m.userSeq
+		and o.optionSeq =
+		go.optionSeq
+		and od.status<![CDATA[>]]>0
+		and o.refund = #{param4}
+		and
+		DATE(od.orderTime)<![CDATA[>]]>
+		DATE(#{param1} - INTERVAL 1 DAY)
+		AND
+		DATE(od.orderTime)<![CDATA[<]]>
+		DATE(#{param2}
+		+ INTERVAL 1 DAY)) R;
+	</select>
+
+	<!-- 반품 상품 조회 -->
+	<select id="selectReturnVOList"
+		resultType="com.sb.mall.admin.adminOrder.model.ReturnVO">
+		SELECT
+		o.orderSeq,
+		o.userSeq,
+		m.userName,
+		g.goodsNo,
+		g.goodsName,
+		o.quantity,
+		ifnull(go.opt1Name, '') opt1Name,
+		ifnull(go.opt2Name, '')
+		opt2Name,
+		o.refund,
+		o.salePrice
+		FROM
+		<if test="tableName == 'Order'">
+			OrderDetail od,
+			`Order` o,
+			Goods g,
+			GoodsOption go,
+
+		</if>
+		<if test="tableName == 'CrowdOrder'">
+			CrowdOrderDetail od,
+			CrowdOrder o,
+			CrowdGoods g,
+			CrowdGoodsOption go,
+		</if>
+		MemberInfo m
+		where o.goodsNo =
+		g.goodsNo
+		and o.orderDetailNum =
+		od.orderDetailNum
+		and
+		o.userSeq = m.userSeq
+		and
+		o.optionSeq = go.optionSeq
+		and od.status<![CDATA[>]]>0
+		and
+		o.refund = #{param6}
+		and
+		DATE(od.orderTime)<![CDATA[>]]>
+		DATE(#{param1} - INTERVAL 1 DAY)
+		AND
+		DATE(od.orderTime)<![CDATA[<]]>
+		DATE(#{param2}
+		+ INTERVAL 1 DAY)
+		order by
+		od.orderTime desc limit
+		#{param4},
+		#{param5};
+	</select>
+
+	<!-- 반품상태 업데이트 -->
+	<update id="changeRefund">
+		UPDATE `${param3}` SET
+		`refund` = '${param2}'
+		WHERE
+		<foreach collection="orderArray" item="orderSeq" open="("
+			close=")" separator=" OR ">
+			`orderSeq` ='${orderSeq}'
+		</foreach>
+	</update>
+
+
+
+</mapper> 
+ 

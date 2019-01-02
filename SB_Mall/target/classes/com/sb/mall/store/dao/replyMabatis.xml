@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sb.mall.store.dao.ReplyDao">
+	<insert id="writeReply" parameterType="com.sb.mall.store.model.Reply">
+		insert into Reply(reply, userSeq, salesSeq) values(#{reply}, #{userSeq}, #{salesSeq})
+	</insert>
+
+
+	<select id="getReply" resultType="map">
+		select * from Reply r, MemberInfo m where salesSeq=#{param1} and r.userSeq=m.userSeq order by regTime desc limit #{param2},10
+	</select>
+	
+	<select id="getReplyCount" resultType="java.lang.Integer">
+		select count(*) from Reply where salesSeq=#{salesSeq} 
+	</select>
+	
+	<!-- <select id="getReplyByreqSeq" resultType="map">
+		select * from Reply where replySeq=#{replySeq}
+	</select> -->
+	
+	<update id="setReplyUpdate" parameterType="com.sb.mall.store.model.Reply">
+		update Reply set reply=#{reply} where replySeq=#{replySeq}
+	</update>
+	
+	<delete id="deleteReply" parameterType="java.lang.Integer">
+		delete from Reply where replySeq = #{replySeq}
+	</delete>
+
+</mapper>
