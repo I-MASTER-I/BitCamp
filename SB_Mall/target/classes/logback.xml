@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+    <property name="LOGS_ABSOLUTE_PATH" value="c:/Desktop/logFolder" />
+ 
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    	<layout class="ch.qos.logback.classic.PatternLayout">
+    		<pattern>%d{HH:mm:ss.SSS} [%thread] %-4level [%logger.%method:%line]- %msg%n</pattern>
+    	</layout>
+    </appender>
+ 
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS_ABSOLUTE_PATH}/spring.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-4level [%logger.%method:%line] - %msg %n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS_ABSOLUTE_PATH}/logback.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy                  class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 100MB -->
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+ 
+    <logger name="com.sb.mall"  level="debug" additivity="false">
+        <appender-ref ref="ROLLING" />
+        <appender-ref ref="STDOUT" />
+    </logger>
+    
+    <logger name="jdbc" level="OFF"/>
+  
+	<logger name="jdbc.sqlonly" level="DEBUG" />
+	<logger name="jdbc.sqltiming" level="OFF" />
+	<logger name="jdbc.audit" level="OFF" />
+	<logger name="jdbc.resultset" level="OFF" />
+	<logger name="jdbc.resultsettable" level="DEBUG" />
+	<logger name="jdbc.connection" level="OFF" />
+	  
+ 
+    <root level="warn">
+        <appender-ref ref="STDOUT" />
+    </root>
+ 
+</configuration>
